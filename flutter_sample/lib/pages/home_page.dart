@@ -3,7 +3,9 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_sample/dao/home_dao.dart';
 import 'package:flutter_sample/model/common_model.dart';
+import 'package:flutter_sample/model/grid_nav_model.dart';
 import 'package:flutter_sample/model/home_model.dart';
+import 'package:flutter_sample/widget/grid_nav.dart';
 import 'package:flutter_sample/widget/local_nav.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
@@ -22,6 +24,7 @@ class _HomePageState extends State<HomePage>{
   ];
   double appBarOpacity = 0;
   List<CommonModel> localNavList = [];
+  GridNavModel gridNavModel;
 //  String resultString = "";
 
 
@@ -60,6 +63,7 @@ class _HomePageState extends State<HomePage>{
       setState(() {
 //        resultString = json.encode(model.config);
         localNavList = model.localNavList;
+        gridNavModel = model.gridNav;
       });
     } catch (e) {
       setState(() {
@@ -106,6 +110,7 @@ class _HomePageState extends State<HomePage>{
                     padding: EdgeInsets.fromLTRB(0, 0, 0, 7),
                     child: LocalNav(localNavList: localNavList),
                   ),
+                  GridNav(gridNavModel: gridNavModel),
                   Container(
                     height: 800,
                     child: ListTile(title: Text('test')),
