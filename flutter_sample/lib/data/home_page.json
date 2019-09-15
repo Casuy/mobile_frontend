@@ -51,8 +51,8 @@
   ],
   "gridNav": {
     "workout": {
-      "startColor": "E83015",
-      "endColor": "C73E3A",
+      "startColor": "be0027",
+      "endColor": "000000",
       "mainItem": {
         "title": "Workout",
         "icon": "https://pic.c-ctrip.com/platform/h5/home/grid-nav-items-hotel.png",
@@ -108,8 +108,8 @@
       }
     },
     "equipment": {
-      "startColor": "C73E3A",
-      "endColor": "E83015",
+      "startColor": "000000",
+      "endColor": "be0027",
       "mainItem": {
         "title": "Equipment",
         "icon": "https://pic.c-ctrip.com/platform/h5/home/grid-nav-items-travel.png",

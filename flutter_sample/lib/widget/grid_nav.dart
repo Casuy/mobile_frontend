@@ -101,7 +101,7 @@ class GridNav extends StatelessWidget {
 
   _item(BuildContext context, CommonModel item, bool isFirst) {
     BorderSide borderSide = BorderSide(
-      width: 7,
+      width: 0.8,
       color: Colors.white
     );
     return FractionallySizedBox(
