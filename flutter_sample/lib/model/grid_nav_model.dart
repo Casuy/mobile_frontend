@@ -1,4 +1,4 @@
-import 'package:flutter_sample/model/config_model.dart';
+import 'package:flutter_sample/model/common_model.dart';
 
 class GridNavModel{
   final GridNavItem workout;
@@ -21,11 +21,11 @@ class GridNavModel{
 class GridNavItem{
   final String startColor;
   final String endColor;
-  final ConfigModel mainItem;
-  final ConfigModel item1;
-  final ConfigModel item2;
-  final ConfigModel item3;
-  final ConfigModel item4;
+  final CommonModel mainItem;
+  final CommonModel item1;
+  final CommonModel item2;
+  final CommonModel item3;
+  final CommonModel item4;
 
   GridNavItem(
       {this.startColor,
@@ -40,11 +40,11 @@ class GridNavItem{
     return GridNavItem(
       startColor: json['startColor'],
       endColor: json['endColor'],
-      mainItem: ConfigModel.fromJson(json['mainItem']),
-      item1: ConfigModel.fromJson(json['item1']),
-      item2: ConfigModel.fromJson(json['item2']),
-      item3: ConfigModel.fromJson(json['item3']),
-      item4: ConfigModel.fromJson(json['item4'])
+      mainItem: CommonModel.fromJson(json['mainItem']),
+      item1: CommonModel.fromJson(json['item1']),
+      item2: CommonModel.fromJson(json['item2']),
+      item3: CommonModel.fromJson(json['item3']),
+      item4: CommonModel.fromJson(json['item4'])
 
     );
   }

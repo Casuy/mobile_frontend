@@ -51,10 +51,11 @@ class _HomePageState extends State<HomePage>{
 //        resultString = e.toString();
 //      });
 //    });
+
 //    try {
       HomeModel model = await HomeDao.fetch();
       setState(() {
-        resultString = json.encode(model);
+        resultString = json.encode(model.config);
       });
 //    } catch (e) {
 //      setState(() {

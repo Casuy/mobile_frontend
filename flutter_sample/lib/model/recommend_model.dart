@@ -1,14 +1,14 @@
-import 'package:flutter_sample/model/config_model.dart';
+import 'package:flutter_sample/model/common_model.dart';
 
 class RecommendModel{
   final String icon;
   final String moreUrl;
-  final ConfigModel bigCard1;
-  final ConfigModel bigCard2;
-  final ConfigModel smallCard1;
-  final ConfigModel smallCard2;
-  final ConfigModel smallCard3;
-  final ConfigModel smallCard4;
+  final CommonModel bigCard1;
+  final CommonModel bigCard2;
+  final CommonModel smallCard1;
+  final CommonModel smallCard2;
+  final CommonModel smallCard3;
+  final CommonModel smallCard4;
 
   RecommendModel(
       {this.icon,
@@ -24,12 +24,12 @@ class RecommendModel{
     return RecommendModel(
       icon: json['icon'],
       moreUrl: json['moreUrl'],
-      bigCard1: ConfigModel.fromJson(json['bigCard1']),
-      bigCard2: ConfigModel.fromJson(json['bigCard2']),
-      smallCard1: ConfigModel.fromJson(json['smallCard1']),
-      smallCard2: ConfigModel.fromJson(json['smallCard2']),
-      smallCard3: ConfigModel.fromJson(json['smallCard3']),
-      smallCard4: ConfigModel.fromJson(json['smallCard4']),
+      bigCard1: CommonModel.fromJson(json['bigCard1']),
+      bigCard2: CommonModel.fromJson(json['bigCard2']),
+      smallCard1: CommonModel.fromJson(json['smallCard1']),
+      smallCard2: CommonModel.fromJson(json['smallCard2']),
+      smallCard3: CommonModel.fromJson(json['smallCard3']),
+      smallCard4: CommonModel.fromJson(json['smallCard4']),
     );
   }
 }

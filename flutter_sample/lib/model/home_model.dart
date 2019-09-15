@@ -41,6 +41,5 @@ class HomeModel{
       gridNav: GridNavModel.fromJson(json['gridNav']),
       recommend: RecommendModel.fromJson(json['recommend'])
     );
-
   }
 }
