@@ -102,7 +102,10 @@ class _HomePageState extends State<HomePage>{
                       pagination: SwiperPagination(),
                     ),
                   ),
-                  LocalNav(localNavList: localNavList),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 7),
+                    child: LocalNav(localNavList: localNavList),
+                  ),
                   Container(
                     height: 800,
                     child: ListTile(title: Text('test')),
