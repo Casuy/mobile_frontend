@@ -22,7 +22,7 @@
   ],
   "localNavList": [
     {
-      "icon": "http://www.devio.org/io/flutter_app/img/ln_ticket.png",
+      "icon": "https://cdn4.iconfinder.com/data/icons/small-n-flat/24/calendar-512.png",
       "title": "Record",
       "url": "https://m.ctrip.com/html5/ticket/",
       "statusBarColor": "19A0F0",
