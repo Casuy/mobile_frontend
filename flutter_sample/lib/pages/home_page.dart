@@ -2,7 +2,10 @@ import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_sample/dao/home_dao.dart';
+import 'package:flutter_sample/model/common_model.dart';
 import 'package:flutter_sample/model/home_model.dart';
+import 'package:flutter_sample/widget/grid_nav.dart';
+import 'package:flutter_sample/widget/local_nav.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
 const APPBAR_SCROLL_OFFSET = 100;
@@ -19,7 +22,8 @@ class _HomePageState extends State<HomePage>{
     'https://yurielkaim.com/wp-content/uploads/2017/02/9-Important-Stretching-Exercises-for-Seniors-to-Do-Every-Day.jpg'
   ];
   double appBarOpacity = 0;
-  String resultString = "";
+  List<CommonModel> localNavList = [];
+//  String resultString = "";
 
 
   @override
@@ -55,11 +59,13 @@ class _HomePageState extends State<HomePage>{
     try {
       HomeModel model = await HomeDao.fetch();
       setState(() {
-        resultString = json.encode(model.config);
+//        resultString = json.encode(model.config);
+        localNavList = model.localNavList;
       });
     } catch (e) {
       setState(() {
-        resultString = e.toString();
+//        resultString = e.toString();
+      print(e);
       });
     }
   }
@@ -96,9 +102,10 @@ class _HomePageState extends State<HomePage>{
                       pagination: SwiperPagination(),
                     ),
                   ),
+                  LocalNav(localNavList: localNavList),
                   Container(
                     height: 800,
-                    child: ListTile(title: Text(resultString)),
+                    child: ListTile(title: Text('test')),
                   )
                 ],
               ),

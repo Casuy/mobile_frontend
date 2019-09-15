@@ -47,13 +47,6 @@
       "title": "Group",
       "url": "https://dp.ctrip.com/webapp/activity/daytour",
       "hideAppBar": true
-    },
-    {
-      "icon": "http://www.devio.org/io/flutter_app/img/ln_guide.png",
-      "title": "å½“åœ°æ”»ç•¥",
-      "url": "https://m.ctrip.com/webapp/you/",
-      "statusBarColor": "19A0F0",
-      "hideAppBar": true
     }
   ],
   "gridNav": {
