@@ -79,7 +79,7 @@ class GridNav extends StatelessWidget {
             child: Text(
               model.title,
               style: TextStyle(
-                fontSize: 20,
+                fontSize: 18,
                 color: Colors.white
               ),
             )
@@ -120,7 +120,7 @@ class GridNav extends StatelessWidget {
                 item.title,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 16,
                     color: Colors.white
                 ),
               ),
