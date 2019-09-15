@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_sample/dao/home_dao.dart';
 import 'package:flutter_sample/model/common_model.dart';
 import 'package:flutter_sample/model/home_model.dart';
-import 'package:flutter_sample/widget/grid_nav.dart';
 import 'package:flutter_sample/widget/local_nav.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
@@ -73,6 +72,7 @@ class _HomePageState extends State<HomePage>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xfff2f2f2),
       body: Stack(
         children: <Widget>[
           MediaQuery.removePadding(
@@ -114,7 +114,7 @@ class _HomePageState extends State<HomePage>{
           Opacity(
             opacity: appBarOpacity,
             child: Container(
-              height: 50,
+              height: 60,
               decoration: BoxDecoration(color: Colors.red),
               child: Center(
                 child: Padding(padding: EdgeInsets.only(top: 20),

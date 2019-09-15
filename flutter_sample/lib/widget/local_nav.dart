@@ -12,7 +12,7 @@ class LocalNav extends StatelessWidget {
       height: 80,
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.all(Radius.circular(6))
+//        borderRadius: BorderRadius.all(Radius.circular(6))
       ),
       child: Padding(
         padding: EdgeInsets.all(7),
@@ -42,12 +42,12 @@ class LocalNav extends StatelessWidget {
         children: <Widget>[
           Image.network(
             model.icon,
-            width: 40,
-            height: 40
+            width: 50,
+            height: 50
           ),
           Text(
             model.title,
-            style: TextStyle(fontSize: 12),
+            style: TextStyle(fontSize: 14),
           )
         ],
       ),
