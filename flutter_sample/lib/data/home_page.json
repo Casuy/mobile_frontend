@@ -60,21 +60,21 @@
         "statusBarColor": "4289ff"
       },
       "item1": {
-        "title": "æµ·å¤–é…’åº—",
+        "title": "Full-body",
         "url": "https://m.ctrip.com/webapp/hotel/oversea/?otype=1",
         "statusBarColor": "4289ff"
       },
       "item2": {
-        "title": "ç‰¹ä»·é…’åº—",
+        "title": "Leg",
         "url": "https://m.ctrip.com/webapp/hotel/hotsale"
       },
       "item3": {
-        "title": "å›¢è´­",
+        "title": "Arm",
         "url": "https://m.ctrip.com/webapp/tuan/?secondwakeup=true&dpclickjump=true",
         "hideAppBar": true
       },
       "item4": {
-        "title": "æ°‘å®¿ å®¢æ ˆ",
+        "title": "Gluteus",
         "url": "https://m.ctrip.com/webapp/inn/index",
         "hideAppBar": true
       }
