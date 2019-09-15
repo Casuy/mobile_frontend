@@ -65,6 +65,7 @@ class GridNav extends StatelessWidget {
     return _wrapGesture(
       context,
       Stack(
+        alignment: AlignmentDirectional.topCenter,
         children: <Widget>[
           Image.network(
             model.icon,
@@ -73,12 +74,15 @@ class GridNav extends StatelessWidget {
             width: 120,
             alignment: AlignmentDirectional.bottomEnd,
           ),
-          Text(
-            model.title,
-            style: TextStyle(
-              fontSize: 14,
-              color: Colors.white
-            ),
+          Container(
+            margin: EdgeInsets.only(top: 11),
+            child: Text(
+              model.title,
+              style: TextStyle(
+                fontSize: 20,
+                color: Colors.white
+              ),
+            )
           )
         ],
       ),
@@ -116,7 +120,7 @@ class GridNav extends StatelessWidget {
                 item.title,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                    fontSize: 14,
+                    fontSize: 20,
                     color: Colors.white
                 ),
               ),

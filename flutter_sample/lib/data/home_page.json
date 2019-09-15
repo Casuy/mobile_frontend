@@ -52,7 +52,7 @@
   "gridNav": {
     "workout": {
       "startColor": "E83015",
-      "endColor": "AB3B3A",
+      "endColor": "C73E3A",
       "mainItem": {
         "title": "Workout",
         "icon": "https://pic.c-ctrip.com/platform/h5/home/grid-nav-items-hotel.png",
@@ -65,16 +65,16 @@
         "statusBarColor": "4289ff"
       },
       "item2": {
-        "title": "Leg",
+        "title": "Cardiovascular",
         "url": "https://m.ctrip.com/webapp/hotel/hotsale"
       },
       "item3": {
-        "title": "Arm",
+        "title": "Stretch",
         "url": "https://m.ctrip.com/webapp/tuan/?secondwakeup=true&dpclickjump=true",
         "hideAppBar": true
       },
       "item4": {
-        "title": "Gluteus",
+        "title": "Anaerobic",
         "url": "https://m.ctrip.com/webapp/inn/index",
         "hideAppBar": true
       }
@@ -108,8 +108,8 @@
       }
     },
     "equipment": {
-      "startColor": "34c2aa",
-      "endColor": "6cd557",
+      "startColor": "C73E3A",
+      "endColor": "E83015",
       "mainItem": {
         "title": "Equipment",
         "icon": "https://pic.c-ctrip.com/platform/h5/home/grid-nav-items-travel.png",
@@ -118,19 +118,19 @@
         "statusBarColor": "19A0F0"
       },
       "item1": {
-        "title": "é—¨ç¥¨",
+        "title": "Shoes",
         "url": "https://m.ctrip.com/webapp/ticket/ticket",
         "statusBarColor": "19A0F0",
         "hideAppBar": true
       },
       "item2": {
-        "title": "ç›®çš„åœ°æ”»ç•¥",
+        "title": "Protection",
         "url": "https://m.ctrip.com/html5/you/",
         "statusBarColor": "19A0F0",
         "hideAppBar": true
       },
       "item3": {
-        "title": "é‚®è½®æ—…è¡Œ",
+        "title": "Sportswear",
         "url": "https://m.ctrip.com/webapp/cruise/index",
         "hideAppBar": true
       },
