@@ -1,4 +1,8 @@
+import 'dart:convert';
+import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter_sample/dao/home_dao.dart';
+import 'package:flutter_sample/model/home_model.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
 const APPBAR_SCROLL_OFFSET = 100;
@@ -15,6 +19,15 @@ class _HomePageState extends State<HomePage>{
     'https://yurielkaim.com/wp-content/uploads/2017/02/9-Important-Stretching-Exercises-for-Seniors-to-Do-Every-Day.jpg'
   ];
   double appBarOpacity = 0;
+  String resultString = "";
+
+
+  @override
+  void initState() {
+    super.initState();
+    loadData();
+  }
+
   _onScroll(offset){
     double alpha = offset / APPBAR_SCROLL_OFFSET;
     if (alpha < 0){
@@ -25,7 +38,31 @@ class _HomePageState extends State<HomePage>{
     setState(() {
       appBarOpacity = alpha;
     });
+    print(appBarOpacity);
   }
+
+  loadData() async {
+//    HomeDao.fetch().then((result) {
+//      setState(() {
+//        resultString = json.encode(result);
+//      });
+//    }).catchError((e) {
+//      setState(() {
+//        resultString = e.toString();
+//      });
+//    });
+//    try {
+      HomeModel model = await HomeDao.fetch();
+      setState(() {
+        resultString = json.encode(model);
+      });
+//    } catch (e) {
+//      setState(() {
+//        resultString = e.toString();
+//      });
+//    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,7 +97,7 @@ class _HomePageState extends State<HomePage>{
                   ),
                   Container(
                     height: 800,
-                    child: ListTile(title: Text('test'),),
+                    child: ListTile(title: Text(resultString)),
                   )
                 ],
               ),

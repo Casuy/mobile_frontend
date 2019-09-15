@@ -1,10 +1,19 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:flutter_sample/model/home_model.dart';
 import 'package:http/http.dart' as http;
-const HOME_URL = '';
+
+const HOME_URL = 'https://raw.githubusercontent.com/Casuy/mobile_frontend/master/flutter_sample/lib/data/home_page.json?token=AJZUEJZH4VABYL6QPVOH4RK5Q3KCK';
 
 class HomeDao{
   static Future<HomeModel> fetch() async {
-    final
+    final response = await http.get(HOME_URL);
+    if (response.statusCode == 200) {
+      Utf8Decoder utf8decoder = Utf8Decoder();
+      var result = json.decode(utf8decoder.convert(response.bodyBytes));
+      return HomeModel.fromJson(result);
+    } else {
+      throw Exception('Failed to load home_page.json');
+    }
   }
 }

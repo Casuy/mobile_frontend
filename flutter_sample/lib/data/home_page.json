@@ -23,28 +23,28 @@
   "localNavList": [
     {
       "icon": "http://www.devio.org/io/flutter_app/img/ln_ticket.png",
-      "title": "æ™¯ç‚¹Â·çŽ©ä¹",
+      "title": "Record",
       "url": "https://m.ctrip.com/html5/ticket/",
       "statusBarColor": "19A0F0",
       "hideAppBar": true
     },
     {
       "icon": "http://www.devio.org/io/flutter_app/img/ln_weekend.png",
-      "title": "å‘¨è¾¹æ¸¸",
+      "title": "Plan",
       "url": "https://m.ctrip.com/webapp/vacations/tour/around?&from=https%3A%2F%2Fm.ctrip.com%2Fhtml5%2F",
       "statusBarColor": "52149f",
       "hideAppBar": true
     },
     {
       "icon": "http://www.devio.org/io/flutter_app/img/ln_food.png",
-      "title": "ç¾Žé£Ÿæž—",
+      "title": "Nearby",
       "url": "https://m.ctrip.com/webapp/you/foods/address.html?new=1&ishideheader=true",
       "statusBarColor": "19A0F0",
       "hideAppBar": true
     },
     {
       "icon": "http://www.devio.org/io/flutter_app/img/ln_oneday.png",
-      "title": "ä¸€æ—¥æ¸¸",
+      "title": "Group",
       "url": "https://dp.ctrip.com/webapp/activity/daytour",
       "hideAppBar": true
     },
@@ -57,11 +57,11 @@
     }
   ],
   "gridNav": {
-    "hotel": {
+    "workout": {
       "startColor": "fa5956",
       "endColor": "fa9b4d",
       "mainItem": {
-        "title": "é…’åº—",
+        "title": "Workout",
         "icon": "https://pic.c-ctrip.com/platform/h5/home/grid-nav-items-hotel.png",
         "url": "https://m.ctrip.com/webapp/hotel/",
         "statusBarColor": "4289ff"
@@ -86,11 +86,11 @@
         "hideAppBar": true
       }
     },
-    "flight": {
+    "activity": {
       "startColor": "4b8fed",
       "endColor": "53bced",
       "mainItem": {
-        "title": "æœºç¥¨",
+        "title": "Activity¨",
         "icon": "https://pic.c-ctrip.com/platform/h5/home/grid-nav-items-flight.png",
         "url": "https://m.ctrip.com/html5/flight/swift/index"
       },
@@ -114,11 +114,11 @@
         "hideAppBar": true
       }
     },
-    "travel": {
+    "equipment": {
       "startColor": "34c2aa",
       "endColor": "6cd557",
       "mainItem": {
-        "title": "æ—…æ¸¸",
+        "title": "Equipment",
         "icon": "https://pic.c-ctrip.com/platform/h5/home/grid-nav-items-travel.png",
         "url": "https://m.ctrip.com/webapp/vacations/tour/vacations",
         "hideAppBar": true,
@@ -209,7 +209,7 @@
       "hideAppBar": true
     }
   ],
-  "salesBox": {
+  "recommend": {
     "icon": "http://www.devio.org/io/flutter_app/img/sales_box_huodong.png",
     "moreUrl": "https://contents.ctrip.com/activitysetupapp/mkt/index/moreact",
     "bigCard1": {

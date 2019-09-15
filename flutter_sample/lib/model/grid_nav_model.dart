@@ -40,7 +40,7 @@ class GridNavItem{
     return GridNavItem(
       startColor: json['startColor'],
       endColor: json['endColor'],
-      mainItem: json['mainItem'],
+      mainItem: ConfigModel.fromJson(json['mainItem']),
       item1: ConfigModel.fromJson(json['item1']),
       item2: ConfigModel.fromJson(json['item2']),
       item3: ConfigModel.fromJson(json['item3']),
