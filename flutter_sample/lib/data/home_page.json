@@ -22,28 +22,28 @@
   ],
   "localNavList": [
     {
-      "icon": "https://cdn4.iconfinder.com/data/icons/small-n-flat/24/calendar-512.png",
+      "icon": "https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678135-sticky-note-512.png",
       "title": "Record",
       "url": "https://m.ctrip.com/html5/ticket/",
       "statusBarColor": "19A0F0",
       "hideAppBar": true
     },
     {
-      "icon": "http://www.devio.org/io/flutter_app/img/ln_weekend.png",
+      "icon": "https://cdn4.iconfinder.com/data/icons/small-n-flat/24/calendar-512.png",
       "title": "Plan",
       "url": "https://m.ctrip.com/webapp/vacations/tour/around?&from=https%3A%2F%2Fm.ctrip.com%2Fhtml5%2F",
       "statusBarColor": "52149f",
       "hideAppBar": true
     },
     {
-      "icon": "http://www.devio.org/io/flutter_app/img/ln_food.png",
+      "icon": "https://cdn4.iconfinder.com/data/icons/small-n-flat/24/map-marker-512.png",
       "title": "Nearby",
       "url": "https://m.ctrip.com/webapp/you/foods/address.html?new=1&ishideheader=true",
       "statusBarColor": "19A0F0",
       "hideAppBar": true
     },
     {
-      "icon": "http://www.devio.org/io/flutter_app/img/ln_oneday.png",
+      "icon": "https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-group-512.png",
       "title": "Group",
       "url": "https://dp.ctrip.com/webapp/activity/daytour",
       "hideAppBar": true
