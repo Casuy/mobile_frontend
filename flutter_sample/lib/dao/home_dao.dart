@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter_sample/model/home_model.dart';
 import 'package:http/http.dart' as http;
 
-const HOME_URL = 'https://raw.githubusercontent.com/Casuy/mobile_frontend/master/flutter_sample/lib/data/home_page.json';
+const HOME_URL = 'https://raw.githubusercontent.com/Casuy/mobile_frontend/master/flutter_sample/lib/data/home_page.json?token=AJZUEJ4TZELK3MVPHDMUUSC5Q3TBS';
 
 class HomeDao{
   static Future<HomeModel> fetch() async {

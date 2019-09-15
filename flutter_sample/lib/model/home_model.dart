@@ -42,4 +42,17 @@ class HomeModel{
       recommend: RecommendModel.fromJson(json['recommend'])
     );
   }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+
+    data['localNavList'] = this.localNavList;
+    data['bannerList'] = this.bannerList;
+    data['subNavList'] = this.subNavList;
+    data['config'] = this.config;
+    data['gridNav'] = this.gridNav;
+    data['recommend'] = this.recommend;
+
+    return data;
+  }
 }
