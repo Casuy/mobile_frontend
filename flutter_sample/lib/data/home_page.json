@@ -80,29 +80,29 @@
       }
     },
     "activity": {
-      "startColor": "4b8fed",
-      "endColor": "53bced",
+      "startColor": "b52e31",
+      "endColor": "b52e31",
       "mainItem": {
         "title": "Activity¨",
         "icon": "https://pic.c-ctrip.com/platform/h5/home/grid-nav-items-flight.png",
         "url": "https://m.ctrip.com/html5/flight/swift/index"
       },
       "item1": {
-        "title": "ç«è½¦ç¥¨",
+        "title": "Running",
         "url": "https://m.ctrip.com/webapp/train/?secondwakeup=true&dpclickjump=true&from=https%3A%2F%2Fm.ctrip.com%2Fhtml5%2F#/index?VNK=4e431539",
         "hideAppBar": true
       },
       "item2": {
-        "title": "ç‰¹ä»·æœºç¥¨",
+        "title": "Walking",
         "url": "https://m.ctrip.com/html5/flight/swift/index"
       },
       "item3": {
-        "title": "æ±½è½¦ç¥¨Â·èˆ¹ç¥¨",
+        "title": "Exercise",
         "url": "https://m.ctrip.com/html5/Trains/bus/",
         "hideAppBar": true
       },
       "item4": {
-        "title": "ä¸“è½¦Â·ç§Ÿè½¦",
+        "title": "Swimming",
         "url": "https://m.ctrip.com/webapp/car/index?s=ctrip&from=https%3A%2F%2Fm.ctrip.com%2Fhtml5%2F",
         "hideAppBar": true
       }

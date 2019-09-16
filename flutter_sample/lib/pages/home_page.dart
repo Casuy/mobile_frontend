@@ -44,7 +44,6 @@ class _HomePageState extends State<HomePage>{
     setState(() {
       appBarOpacity = alpha;
     });
-    print(appBarOpacity);
   }
 
   loadData() async {
@@ -92,6 +91,7 @@ class _HomePageState extends State<HomePage>{
               },
               child: ListView(
                 children: <Widget>[
+                  //top banner
                   Container(
                     height: 250,
                     child: Swiper(
@@ -106,13 +106,16 @@ class _HomePageState extends State<HomePage>{
                       pagination: SwiperPagination(),
                     ),
                   ),
+                  //local navigation
                   Padding(
                     padding: EdgeInsets.fromLTRB(0, 0, 0, 7),
                     child: LocalNav(localNavList: localNavList),
                   ),
+                  //grid navigation
                   GridNav(gridNavModel: gridNavModel),
+                  //demo view
                   Container(
-                    height: 800,
+                    height: 200,
                     child: ListTile(title: Text('test')),
                   )
                 ],

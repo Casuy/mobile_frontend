@@ -20,9 +20,9 @@ class GridNav extends StatelessWidget {
     if (gridNavModel.workout != null) {
       items.add(_gridNavItem(context, gridNavModel.workout, true));
     }
-//    if (gridNavModel.activity != null) {
-//      items.add(_gridNavItem(context, gridNavModel.activity, false));
-//    }
+    if (gridNavModel.activity != null) {
+      items.add(_gridNavItem(context, gridNavModel.activity, false));
+    }
     if (gridNavModel.equipment != null) {
       items.add(_gridNavItem(context, gridNavModel.equipment, false));
     }
@@ -49,15 +49,17 @@ class GridNav extends StatelessWidget {
     Color startColor = Color(int.parse('0xff'+gridNavItem.startColor));
     Color endColor = Color(int.parse('0xff'+gridNavItem.endColor));
 
-    return Container(
-      height: 150,
-      margin: isFirst ? null : EdgeInsets.only(top: 7),
-      decoration: BoxDecoration(
-        //color linear gradient
-        gradient: LinearGradient(colors: [startColor, endColor])
-      ),
-      child: Row(children: expandItems),
-    );
+    return Opacity(
+      opacity: 0.5,
+      child: Container(
+        height: 150,
+        margin: isFirst ? null : EdgeInsets.only(top: 7),
+        decoration: BoxDecoration(
+          //color linear gradient
+            gradient: LinearGradient(colors: [startColor, endColor])
+        ),
+        child: Row(children: expandItems),
+      ),);
 
   }
 
