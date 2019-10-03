@@ -5,47 +5,47 @@
   "bannerList": [
     {
       "icon": "http://www.devio.org/io/flutter_app/img/banner/100h10000000q7ght9352.jpg",
-      "url": "https://gs.ctrip.com/html5/you/travels/1422/3771516.html?from=https%3A%2F%2Fm.ctrip.com%2Fhtml5%2F"
+      "url": ""
     },
     {
       "icon": "https://dimg04.c-ctrip.com/images/300h0u000000j05rnD96B_C_500_280.jpg",
-      "url": "https://m.ctrip.com/webapp/vacations/tour/detail?productid=3168213&departcityid=2&salecityid=2&from=https%3A%2F%2Fm.ctrip.com%2Fhtml5%2F"
+      "url": ""
     },
     {
       "icon": "http://pages.ctrip.com/hotel/201811/jdsc_640es_tab1.jpg",
-      "url": "https://m.ctrip.com/events/jiudianshangchenghuodong.html?disable_webview_cache_key=1"
+      "url": ""
     },
     {
       "icon": "https://dimg03.c-ctrip.com/images/fd/tg/g1/M03/7E/19/CghzfVWw6OaACaJXABqNWv6ecpw824_C_500_280_Q90.jpg",
-      "url": "https://m.ctrip.com/webapp/vacations/tour/detail?productid=53720&departcityid=2&salecityid=2&from=https%3A%2F%2Fm.ctrip.com%2Fhtml5%2F"
+      "url": ""
     }
   ],
   "localNavList": [
     {
       "icon": "https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678065-file-bookmark-512.png",
       "title": "Record",
-      "url": "https://m.ctrip.com/html5/ticket/",
+      "url": "",
       "statusBarColor": "19A0F0",
       "hideAppBar": true
     },
     {
       "icon": "https://cdn4.iconfinder.com/data/icons/small-n-flat/24/calendar-512.png",
       "title": "Plan",
-      "url": "https://m.ctrip.com/webapp/vacations/tour/around?&from=https%3A%2F%2Fm.ctrip.com%2Fhtml5%2F",
+      "url": "",
       "statusBarColor": "52149f",
       "hideAppBar": true
     },
     {
       "icon": "https://cdn4.iconfinder.com/data/icons/small-n-flat/24/map-marker-512.png",
       "title": "Nearby",
-      "url": "https://m.ctrip.com/webapp/you/foods/address.html?new=1&ishideheader=true",
+      "url": "",
       "statusBarColor": "19A0F0",
       "hideAppBar": true
     },
     {
       "icon": "https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-group-512.png",
       "title": "Friends",
-      "url": "https://dp.ctrip.com/webapp/activity/daytour",
+      "url": "",
       "hideAppBar": true
     }
   ],

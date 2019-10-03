@@ -83,8 +83,7 @@ class _HomePageState extends State<HomePage>{
             context: context,
             child: NotificationListener(
               onNotification: (scrollNotification){
-                if (scrollNotification is ScrollUpdateNotification &&
-                    scrollNotification.depth == 0){
+                if (scrollNotification is ScrollUpdateNotification && scrollNotification.depth == 0){
                   //when scroll and update listview
                   _onScroll(scrollNotification.metrics.pixels);
                 }

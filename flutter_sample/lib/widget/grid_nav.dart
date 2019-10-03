@@ -50,7 +50,7 @@ class GridNav extends StatelessWidget {
     Color endColor = Color(int.parse('0xff'+gridNavItem.endColor));
 
     return Opacity(
-      opacity: 0.5,
+      opacity: 1,
       child: Container(
         height: 150,
         margin: isFirst ? null : EdgeInsets.only(top: 7),
