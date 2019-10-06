@@ -49,17 +49,15 @@ class GridNav extends StatelessWidget {
     Color startColor = Color(int.parse('0xff'+gridNavItem.startColor));
     Color endColor = Color(int.parse('0xff'+gridNavItem.endColor));
 
-    return Opacity(
-      opacity: 1,
-      child: Container(
-        height: 150,
-        margin: isFirst ? null : EdgeInsets.only(top: 7),
-        decoration: BoxDecoration(
-          //color linear gradient
-            gradient: LinearGradient(colors: [startColor, endColor])
-        ),
-        child: Row(children: expandItems),
-      ),);
+    return Container(
+      height: 150,
+      margin: isFirst ? null : EdgeInsets.only(top: 7),
+      decoration: BoxDecoration(
+        //color linear gradient
+          gradient: LinearGradient(colors: [startColor, endColor])
+      ),
+      child: Row(children: expandItems),
+    );
 
   }
 
