@@ -47,11 +47,11 @@ class _WebViewState extends State<WebView>{
 
   @override
   void dispose() {
-    super.dispose();
     _onUrlChanged.cancel();
     _onStateChanged.cancel();
     _onHttpError.cancel();
     webViewRef.dispose();
+    super.dispose();
   }
 
   @override

@@ -9,9 +9,7 @@ class GridNav extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: _gridNavItems(context)
-    );
+    return Column(children: _gridNavItems(context));
   }
 
   _gridNavItems(BuildContext context) {
@@ -38,80 +36,69 @@ class GridNav extends StatelessWidget {
 
     List<Widget> expandItems = [];
     items.forEach((item) {
-      expandItems.add(
-        Expanded(
-          child: item,
-          flex: 1,
-        )
-      );
+      expandItems.add(Expanded(
+        child: item,
+        flex: 1,
+      ));
     });
 
-    Color startColor = Color(int.parse('0xff'+gridNavItem.startColor));
-    Color endColor = Color(int.parse('0xff'+gridNavItem.endColor));
+    Color startColor = Color(int.parse('0xff' + gridNavItem.startColor));
+    Color endColor = Color(int.parse('0xff' + gridNavItem.endColor));
 
     return Container(
       height: 150,
       margin: isFirst ? null : EdgeInsets.only(top: 7),
       decoration: BoxDecoration(
-        //color linear gradient
-          gradient: LinearGradient(colors: [startColor, endColor])
-      ),
+          //color linear gradient
+          gradient: LinearGradient(colors: [startColor, endColor])),
       child: Row(children: expandItems),
     );
-
   }
 
   _mainItem(BuildContext context, CommonModel model) {
     return _wrapGesture(
-      context,
-      Stack(
-        alignment: AlignmentDirectional.topCenter,
-        children: <Widget>[
-          Image.network(
-            model.icon,
-            fit: BoxFit.contain,
-            height: 100,
-            width: 120,
-            alignment: AlignmentDirectional.bottomEnd,
-          ),
-          Container(
-            margin: EdgeInsets.only(top: 11),
-            child: Text(
-              model.title,
-              style: TextStyle(
-                fontSize: 18,
-                color: Colors.white
-              ),
-            )
-          )
-        ],
-      ),
-      model
-    );
+        context,
+        Stack(
+          alignment: AlignmentDirectional.topCenter,
+          children: <Widget>[
+            Image.network(
+              model.icon,
+              fit: BoxFit.contain,
+              height: 100,
+              width: 120,
+              alignment: AlignmentDirectional.bottomEnd,
+            ),
+            Container(
+                margin: EdgeInsets.only(top: 11),
+                child: Text(
+                  model.title,
+                  style: TextStyle(fontSize: 18, color: Colors.white),
+                ))
+          ],
+        ),
+        model);
   }
 
-  _doubleItems(BuildContext context, CommonModel topItem, CommonModel bottomItem) {
+  _doubleItems(
+      BuildContext context, CommonModel topItem, CommonModel bottomItem) {
     return Column(
       children: <Widget>[
         Expanded(child: _item(context, topItem, true)),
-        Expanded(child: _item(context, bottomItem, false),)
+        Expanded(
+          child: _item(context, bottomItem, false),
+        )
       ],
     );
   }
 
   _item(BuildContext context, CommonModel item, bool isFirst) {
-    BorderSide borderSide = BorderSide(
-      width: 0.8,
-      color: Colors.white
-    );
+    BorderSide borderSide = BorderSide(width: 0.8, color: Colors.white);
     return FractionallySizedBox(
       widthFactor: 1,
       child: Container(
         decoration: BoxDecoration(
           border: Border(
-            left: borderSide,
-            bottom: isFirst ? borderSide : BorderSide.none
-          ),
+              left: borderSide, bottom: isFirst ? borderSide : BorderSide.none),
         ),
         child: _wrapGesture(
             context,
@@ -119,10 +106,7 @@ class GridNav extends StatelessWidget {
               child: Text(
                 item.title,
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.white
-                ),
+                style: TextStyle(fontSize: 16, color: Colors.white),
               ),
             ),
             item),
@@ -149,5 +133,4 @@ class GridNav extends StatelessWidget {
       child: widget,
     );
   }
-
 }

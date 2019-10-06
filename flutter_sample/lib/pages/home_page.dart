@@ -6,39 +6,36 @@ import 'package:flutter_sample/model/common_model.dart';
 import 'package:flutter_sample/model/grid_nav_model.dart';
 import 'package:flutter_sample/model/home_model.dart';
 import 'package:flutter_sample/widget/grid_nav.dart';
+import 'package:flutter_sample/widget/loading_container.dart';
 import 'package:flutter_sample/widget/local_nav.dart';
+import 'package:flutter_sample/widget/webview.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
 const APPBAR_SCROLL_OFFSET = 100;
 
-class HomePage extends StatefulWidget{
+class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage>{
-  List _imageUrls = [
-    'https://yurielkaim.com/wp-content/uploads/2011/06/4-Best-Core-Strengthening-Exercises-for-Beginners.jpg',
-    'https://yurielkaim.com/wp-content/uploads/2016/10/19-Stretches-to-Improve-Flexibility-You-Can-Do-Right-Now.jpg',
-    'https://yurielkaim.com/wp-content/uploads/2017/02/9-Important-Stretching-Exercises-for-Seniors-to-Do-Every-Day.jpg'
-  ];
+class _HomePageState extends State<HomePage> {
   double appBarOpacity = 0;
   List<CommonModel> localNavList = [];
+  List<CommonModel> bannerList = [];
   GridNavModel gridNavModel;
-//  String resultString = "";
-
+  bool _loading = true;
 
   @override
   void initState() {
     super.initState();
-    loadData();
+    _handleRefresh();
   }
 
-  _onScroll(offset){
+  _onScroll(offset) {
     double alpha = offset / APPBAR_SCROLL_OFFSET;
-    if (alpha < 0){
+    if (alpha < 0) {
       alpha = 0;
-    }else if (alpha > 1){
+    } else if (alpha > 1) {
       alpha = 1;
     }
     setState(() {
@@ -46,7 +43,7 @@ class _HomePageState extends State<HomePage>{
     });
   }
 
-  loadData() async {
+  Future<Null> _handleRefresh() async {
 //    HomeDao.fetch().then((result) {
 //      setState(() {
 //        resultString = json.encode(result);
@@ -60,79 +57,110 @@ class _HomePageState extends State<HomePage>{
     try {
       HomeModel model = await HomeDao.fetch();
       setState(() {
-//        resultString = json.encode(model.config);
         localNavList = model.localNavList;
         gridNavModel = model.gridNav;
+        bannerList = model.bannerList;
+        _loading = false;
       });
     } catch (e) {
-      setState(() {
-//        resultString = e.toString();
       print(e);
+      setState(() {
+        _loading = false;
       });
     }
+    return null;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xfff2f2f2),
-      body: Stack(
-        children: <Widget>[
-          MediaQuery.removePadding(
-            removeTop: true,
-            context: context,
-            child: NotificationListener(
-              onNotification: (scrollNotification){
-                if (scrollNotification is ScrollUpdateNotification && scrollNotification.depth == 0){
-                  //when scroll and update listview
-                  _onScroll(scrollNotification.metrics.pixels);
-                }
-              },
-              child: ListView(
-                children: <Widget>[
-                  //top banner
-                  Container(
-                    height: 250,
-                    child: Swiper(
-                      itemCount: _imageUrls.length,
-                      autoplay: true,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Image.network(
-                            _imageUrls[index],
-                            fit: BoxFit.fill
-                        );
-                      },
-                      pagination: SwiperPagination(),
-                    ),
+      body: LoadingContainer(
+          isLoading: _loading,
+          child: Stack(
+            children: <Widget>[
+              MediaQuery.removePadding(
+                removeTop: true,
+                context: context,
+                child: RefreshIndicator(
+                  onRefresh: _handleRefresh,
+                  child: NotificationListener(
+                    onNotification: (scrollNotification) {
+                      if (scrollNotification is ScrollUpdateNotification && scrollNotification.depth == 0) {
+                        //when scroll and update listview
+                        _onScroll(scrollNotification.metrics.pixels);
+                      }
+                    },
+                    child: _listView,
                   ),
-                  //local navigation
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(0, 0, 0, 7),
-                    child: LocalNav(localNavList: localNavList),
-                  ),
-                  //grid navigation
-                  GridNav(gridNavModel: gridNavModel),
-                  //demo view
-                  Container(
-                    height: 200,
-                    child: ListTile(title: Text('test')),
-                  )
-                ],
+                ),
               ),
-            ),
-          ),
-          Opacity(
-            opacity: appBarOpacity,
-            child: Container(
-              height: 60,
-              decoration: BoxDecoration(color: Colors.red),
-              child: Center(
-                child: Padding(padding: EdgeInsets.only(top: 20),
-                  child: Text('Home', style: TextStyle(color: Colors.white),)),
-              ),
-            ),
-          )
-        ],
+              _appBar
+            ],
+          )),
+    );
+  }
+
+  Widget get _listView {
+    return ListView(
+      children: <Widget>[
+        //top banner
+        _banner,
+        //local navigation
+        Padding(
+          padding: EdgeInsets.fromLTRB(0, 0, 0, 7),
+          child: LocalNav(localNavList: localNavList),
+        ),
+        //grid navigation
+        GridNav(gridNavModel: gridNavModel),
+      ],
+    );
+  }
+
+  Widget get _appBar {
+    return Opacity(
+      opacity: appBarOpacity,
+      child: Container(
+        height: 60,
+        decoration: BoxDecoration(color: Colors.red),
+        child: Center(
+          child: Padding(
+              padding: EdgeInsets.only(top: 20),
+              child: Text(
+                'Home',
+                style: TextStyle(color: Colors.white),
+              )),
+        ),
+      ),
+    );
+  }
+
+  Widget get _banner {
+    return Container(
+      height: 250,
+      child: Swiper(
+        itemCount: bannerList.length,
+        autoplay: true,
+        itemBuilder: (BuildContext context, int index) {
+          return GestureDetector(
+            child: Image.network(bannerList[index].icon, fit: BoxFit.fill),
+            onTap: () {
+              //TODO： go to a specific event page
+//                                  Navigator.push(
+//                                    context,
+//                                    MaterialPageRoute(builder: (context) {
+//                                      CommonModel model = bannerList[index];
+//                                      return WebView(
+//                                        url: model.url,
+//                                        title: model.title,
+//                                        hideAppBar: model.hideAppBar,
+//                                      );
+//                                    }),
+//                                  );
+            },
+          );
+        },
+        pagination: SwiperPagination(),
       ),
     );
   }
