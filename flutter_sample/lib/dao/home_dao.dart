@@ -4,7 +4,8 @@ import 'package:flutter_sample/model/home_model.dart';
 import 'package:http/http.dart' as http;
 
 const HOME_URL = 'http://10.0.2.2:5000/homepage';
-class HomeDao{
+
+class HomeDao {
   static Future<HomeModel> fetch() async {
     final response = await http.get(HOME_URL);
     if (response.statusCode == 200) {

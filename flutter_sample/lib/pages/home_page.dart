@@ -8,10 +8,12 @@ import 'package:flutter_sample/model/home_model.dart';
 import 'package:flutter_sample/widget/grid_nav.dart';
 import 'package:flutter_sample/widget/loading_container.dart';
 import 'package:flutter_sample/widget/local_nav.dart';
+import 'package:flutter_sample/widget/search_bar.dart';
 import 'package:flutter_sample/widget/webview.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
 const APPBAR_SCROLL_OFFSET = 100;
+const SEARCH_BAR_DEFAULT_TEXT = 'popolar events';
 
 class HomePage extends StatefulWidget {
   @override
@@ -61,7 +63,6 @@ class _HomePageState extends State<HomePage> {
         gridNavModel = model.gridNav;
         bannerList = model.bannerList;
         _loading = false;
-        print(localNavList[0].statusBarColor);
       });
     } catch (e) {
       print(e);
@@ -76,6 +77,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xfff2f2f2),
+      //Loading progress indicator
       body: LoadingContainer(
           isLoading: _loading,
           child: Stack(
@@ -120,20 +122,40 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget get _appBar {
-    return Opacity(
-      opacity: appBarOpacity,
-      child: Container(
-        height: 60,
-        decoration: BoxDecoration(color: Colors.red),
-        child: Center(
-          child: Padding(
-              padding: EdgeInsets.only(top: 20),
-              child: Text(
-                'Home',
-                style: TextStyle(color: Colors.white),
-              )),
+    return Column(
+      children: <Widget>[
+        Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              //AppBar gradual shade background
+              colors: [Color(0x66000000), Colors.transparent],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+          ),
+          child: Container(
+            padding: EdgeInsets.fromLTRB(0, 23, 0, 0),
+            height: 75.0,
+            decoration: BoxDecoration(
+              color:
+                  Color.fromARGB((appBarOpacity * 255).toInt(), 255, 255, 255),
+            ),
+            child: SearchBar(
+              searchBarType: appBarOpacity > 0.2
+                  ? SearchBarType.homeLight
+                  : SearchBarType.home,
+              inputBoxClick: _jumpToSearch,
+              speakClick: _jumpToSpeak,
+              defaultText: SEARCH_BAR_DEFAULT_TEXT,
+              leftButtonClick: () {},
+            ),
+          ),
         ),
-      ),
+        Container(
+            height: appBarOpacity > 0.2 ? 0.5 : 0,
+            decoration: BoxDecoration(
+                boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 0.5)]))
+      ],
     );
   }
 
@@ -166,4 +188,8 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+
+  _jumpToSearch() {}
+
+  _jumpToSpeak() {}
 }

@@ -126,6 +126,9 @@ class _WebViewState extends State<WebView> {
           children: <Widget>[
             //Return button
             GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
               child: Container(
                 margin: EdgeInsets.only(left: 10, top: 26),
                 child: Icon(

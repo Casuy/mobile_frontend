@@ -1,17 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_sample/widget/search_bar.dart';
 
-class SearchPage extends StatefulWidget{
+class SearchPage extends StatefulWidget {
   @override
   _SearchPageState createState() => _SearchPageState();
 }
 
-class _SearchPageState extends State<SearchPage>{
+class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text('Search'),
+      appBar: AppBar(),
+      body: Column(
+        children: <Widget>[SearchBar(
+          hideLeft: true,
+          defaultText: '',
+          hint: 'popolar events',
+          leftButtonClick: (){
+            Navigator.pop(context);
+          },
+          onChanged: _onTextChange,
+        )],
       ),
     );
+  }
+
+  _onTextChange(text) {
   }
 }
