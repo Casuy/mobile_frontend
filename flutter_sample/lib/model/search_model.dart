@@ -1,31 +1,41 @@
 class SearchModel {
-  final String icon;
-  final String title;
-  final String url;
-  final String statusBarColor;
-  final bool hideAppBar;
+  String keyword;
+  final List<SearchItem> data;
 
-  SearchModel(
-      {this.icon, this.title, this.url, this.statusBarColor, this.hideAppBar});
+  SearchModel({this.data});
 
   factory SearchModel.fromJson(Map<String, dynamic> json) {
-    return SearchModel(
-        icon: json['icon'],
-        title: json['title'],
-        url: json['url'],
-        statusBarColor: json['statusBarColor'],
-        hideAppBar: json['hideAppBar']);
+    var dataJson = json['data'] as List;
+    List<SearchItem> data =
+        dataJson.map((i) => SearchItem.fromJson(i)).toList();
+    return SearchModel(data: data);
   }
+}
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+class SearchItem {
+  final String word; //Display name
+  final String type; //Running
+  final String time;
+  final String location;
+  final String districtName; //上海
+  final String url;
 
-    data['icon'] = this.icon;
-    data['title'] = this.title;
-    data['url'] = this.url;
-    data['statusBarColor'] = this.statusBarColor;
-    data['hideAppBar'] = this.hideAppBar;
+  SearchItem(
+      {this.word,
+      this.type,
+      this.time,
+      this.location,
+      this.districtName,
+      this.url});
 
-    return data;
+  factory SearchItem.fromJson(Map<String, dynamic> json) {
+    return SearchItem(
+      word: json['word'],
+      type: json['type'],
+      time: json['time'],
+      location: json['location'],
+      districtName: json['districtName'],
+      url: json['url'],
+    );
   }
 }
