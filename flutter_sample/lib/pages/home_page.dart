@@ -61,6 +61,7 @@ class _HomePageState extends State<HomePage> {
         gridNavModel = model.gridNav;
         bannerList = model.bannerList;
         _loading = false;
+        print(localNavList[0].statusBarColor);
       });
     } catch (e) {
       print(e);
@@ -86,7 +87,8 @@ class _HomePageState extends State<HomePage> {
                   onRefresh: _handleRefresh,
                   child: NotificationListener(
                     onNotification: (scrollNotification) {
-                      if (scrollNotification is ScrollUpdateNotification && scrollNotification.depth == 0) {
+                      if (scrollNotification is ScrollUpdateNotification &&
+                          scrollNotification.depth == 0) {
                         //when scroll and update listview
                         _onScroll(scrollNotification.metrics.pixels);
                       }
@@ -146,17 +148,17 @@ class _HomePageState extends State<HomePage> {
             child: Image.network(bannerList[index].icon, fit: BoxFit.fill),
             onTap: () {
               //TODO： go to a specific event page
-//                                  Navigator.push(
-//                                    context,
-//                                    MaterialPageRoute(builder: (context) {
-//                                      CommonModel model = bannerList[index];
-//                                      return WebView(
-//                                        url: model.url,
-//                                        title: model.title,
-//                                        hideAppBar: model.hideAppBar,
-//                                      );
-//                                    }),
-//                                  );
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) {
+                  CommonModel model = bannerList[index];
+                  return WebView(
+                    url: model.url,
+                    title: model.title,
+                    hideAppBar: model.hideAppBar,
+                  );
+                }),
+              );
             },
           );
         },
