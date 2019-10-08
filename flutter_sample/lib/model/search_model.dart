@@ -15,15 +15,21 @@ class SearchModel {
 class SearchItem {
   final String word; //Display name
   final String type; //Running
-  final String time;
-  final String location;
-  final String districtName; //上海
+  final String startTime;
+  final String endTime;
+  final String day;
+  final String month;
+  final String location; //152 La Trobe Street
+  final String districtName; //Melb VIC
   final String url;
 
   SearchItem(
       {this.word,
       this.type,
-      this.time,
+      this.startTime,
+      this.endTime,
+      this.day,
+      this.month,
       this.location,
       this.districtName,
       this.url});
@@ -32,7 +38,10 @@ class SearchItem {
     return SearchItem(
       word: json['word'],
       type: json['type'],
-      time: json['time'],
+      startTime: json['startTime'],
+      endTime: json['endTime'],
+      day: json['day'],
+      month: json['month'],
       location: json['location'],
       districtName: json['districtName'],
       url: json['url'],
