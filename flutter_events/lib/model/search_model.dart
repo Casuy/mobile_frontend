@@ -19,6 +19,8 @@ class SearchItem {
   final String endTime;
   final String day;
   final String month;
+  final int lat;
+  final int lon;
   final String location; //152 La Trobe Street
   final String districtName; //Melb VIC
   final String url;
@@ -30,6 +32,8 @@ class SearchItem {
       this.endTime,
       this.day,
       this.month,
+      this.lat,
+      this.lon,
       this.location,
       this.districtName,
       this.url});
@@ -42,6 +46,8 @@ class SearchItem {
       endTime: json['endTime'],
       day: json['day'],
       month: json['month'],
+      lat: json['lat'],
+      lon: json['lon'],
       location: json['location'],
       districtName: json['districtName'],
       url: json['url'],

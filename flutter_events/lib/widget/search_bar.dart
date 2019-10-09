@@ -31,10 +31,10 @@ class SearchBar extends StatefulWidget {
       : super(key: key);
 
   @override
-  _searchBarState createState() => _searchBarState();
+  _SearchBarState createState() => _SearchBarState();
 }
 
-class _searchBarState extends State<SearchBar> {
+class _SearchBarState extends State<SearchBar> {
   bool showClear = false;
   final TextEditingController _controller = TextEditingController();
 

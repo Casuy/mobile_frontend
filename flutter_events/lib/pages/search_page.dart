@@ -129,24 +129,38 @@ class _SearchPageState extends State<SearchPage> {
                     )));
       },
       child: Container(
-        padding: EdgeInsets.fromLTRB(12, 10, 17, 15),
+        padding: EdgeInsets.fromLTRB(10, 5, 15, 13),
         decoration: BoxDecoration(
             border: Border(bottom: BorderSide(width: 0.3, color: Colors.grey))),
-        child: Column(
+        child: Row(
           children: <Widget>[
-            Row(children: <Widget>[
-              Container(
-                margin: EdgeInsets.fromLTRB(0, 0, 12, 0),
-                alignment: Alignment.topCenter,
-                child: Image(
-                    height: 28,
-                    width: 28,
-                    image: AssetImage(_typeImage(item.type))),
-              ),
-              _title(item),
-            ],),
+            Container(
+              height: 54,
+              width: 70,
+              padding: EdgeInsets.only(right: 10),
+              child: Column(
+              children: <Widget>[
+                //icon image
+                Container(
+                  alignment: Alignment.topCenter,
+                  child: Image(
+                      height: 33,
+                      width: 33,
+                      image: AssetImage(_typeImage(item.type))),
+                ),
+                //distance
+                Container(
+                  padding: EdgeInsets.only(bottom: 5),
+                  child: Text(
+                    '10.5 km',
+                    style: TextStyle(color: Colors.black45, fontSize: 14),
+                  ),
+                )
+              ],
+            ),),
             Column(
               children: <Widget>[
+                _title(item),
                 _location(item),
                 _time(item),
               ],
@@ -166,7 +180,7 @@ class _SearchPageState extends State<SearchPage> {
         DateTime.parse('2019-${item.month}-${item.day} ${item.endTime}:00');
 
     if (dateTime.isBefore(startDateTime)) {
-      return 'Upcomming';
+      return 'Upcoming';
     } else if (dateTime.isAfter(endDateTime)) {
       return 'Past';
     } else {
@@ -175,10 +189,10 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   _statusText(String status) {
-    if (status.contains('Upcomming')) {
+    if (status.contains('Upcoming')) {
       return Text(
         '$status',
-        style: TextStyle(fontSize: 16, color: Color(0xFF2962FF)),
+        style: TextStyle(fontSize: 16, color: Colors.blueAccent),
       );
     } else if (status.contains('Now')) {
       return Text(
@@ -212,6 +226,7 @@ class _SearchPageState extends State<SearchPage> {
   _title(SearchItem item) {
     if (item == null) return null;
     return Container(
+      padding: EdgeInsets.only(top: 5),
       width: 300,
       height: 28,
       child: Text(
