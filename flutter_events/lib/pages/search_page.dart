@@ -227,7 +227,7 @@ class _SearchPageState extends State<SearchPage> {
       width: 300,
       height: 28,
       child: Text(
-        '${item.word}',
+        '${item.title}',
         style: TextStyle(fontSize: 20, color: Colors.black),
       ),
     );
@@ -238,7 +238,7 @@ class _SearchPageState extends State<SearchPage> {
     return Container(
       width: 300,
       child: Text(
-        '${item.location ?? ''}, ${item.districtName ?? ''}',
+        '${item.address ?? ''}, ${item.districtName ?? ''}',
         style: TextStyle(fontSize: 16, color: Colors.black54),
       ),
     );

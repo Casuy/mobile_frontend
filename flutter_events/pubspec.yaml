@@ -26,7 +26,9 @@ dependencies:
   flutter_swiper: ^1.1.6
   http: ^0.12.0+2
   flutter_webview_plugin: ^0.3.8
-  google_maps_flutter: ^0.5.21
+  flutter_map: any
+  latlong: ^0.6.1
+
 
 dev_dependencies:
   flutter_test:
