@@ -5,7 +5,7 @@ import 'package:flutter_sample/widget/search_bar.dart';
 import 'package:flutter_sample/widget/webview.dart';
 
 const URL = 'http://10.0.2.2:5000/search?keyword=';
-const monthMap = {
+const MONTH = {
   '01': 'Jan',
   '02': 'Feb',
   '03': 'Mar',
@@ -19,6 +19,7 @@ const monthMap = {
   '11': 'Nov',
   '12': 'Dec'
 };
+const TYPES = ['ball', 'bike', 'exercise', 'running', 'swim', 'yoga'];
 
 class SearchPage extends StatefulWidget {
   final bool hideLeft;
@@ -76,7 +77,7 @@ class _SearchPageState extends State<SearchPage> {
             child: SearchBar(
               hideLeft: widget.hideLeft,
               defaultText: widget.keyword,
-              hint: 'popolar events',
+              hint: 'Try running, exercise',
               leftButtonClick: () {
                 Navigator.pop(context);
               },
@@ -110,26 +111,11 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   _item(int position) {
-
-    var dateTime = new DateTime.now();
-
     if (searchModel == null || searchModel.data == null) return null;
 
     SearchItem item = searchModel.data[position];
 
-    print(dateTime);
-    var startDateTime =
-        DateTime.parse('2019-${item.month}-${item.day} ${item.startTime}:00');
-    var endDateTime =
-        DateTime.parse('2019-${item.month}-${item.day} ${item.endTime}:00');
-
-    if (dateTime.isBefore(startDateTime)) {
-      status = 'Upcomming';
-    } else if (dateTime.isAfter(endDateTime)) {
-      status = 'Past';
-    } else {
-      status = 'Now';
-    }
+    status = _setStatus(item);
 
     return GestureDetector(
       onTap: () {
@@ -143,40 +129,26 @@ class _SearchPageState extends State<SearchPage> {
                     )));
       },
       child: Container(
-        padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+        padding: EdgeInsets.fromLTRB(12, 10, 17, 15),
         decoration: BoxDecoration(
             border: Border(bottom: BorderSide(width: 0.3, color: Colors.grey))),
-        child: Row(
+        child: Column(
           children: <Widget>[
+            Row(children: <Widget>[
+              Container(
+                margin: EdgeInsets.fromLTRB(0, 0, 12, 0),
+                alignment: Alignment.topCenter,
+                child: Image(
+                    height: 28,
+                    width: 28,
+                    image: AssetImage(_typeImage(item.type))),
+              ),
+              _title(item),
+            ],),
             Column(
               children: <Widget>[
-                Container(
-                  width: 300,
-                  height: 28,
-                  child: Text(
-                    '${item.word}',
-                    style: TextStyle(fontSize: 20, color: Colors.black),
-                  ),
-                ),
-                Container(
-                  width: 300,
-                  child: Text(
-                    '${item.location}, ${item.districtName}',
-                    style: TextStyle(fontSize: 16, color: Colors.black54),
-                  ),
-                ),
-                Container(
-                  width: 300,
-                  child: Row(
-                    children: <Widget>[
-                      _statusText(status),
-                      Text(
-                        '  ·  ${item.startTime} - ${item.endTime}  ${item.day} ${monthMap[item.month]}',
-                        style: TextStyle(fontSize: 16, color: Colors.black),
-                      )
-                    ],
-                  ),
-                ),
+                _location(item),
+                _time(item),
               ],
             )
           ],
@@ -185,22 +157,93 @@ class _SearchPageState extends State<SearchPage> {
     );
   }
 
+  String _setStatus(SearchItem item) {
+    if (item == null) return '';
+    var dateTime = new DateTime.now();
+    var startDateTime =
+        DateTime.parse('2019-${item.month}-${item.day} ${item.startTime}:00');
+    var endDateTime =
+        DateTime.parse('2019-${item.month}-${item.day} ${item.endTime}:00');
+
+    if (dateTime.isBefore(startDateTime)) {
+      return 'Upcomming';
+    } else if (dateTime.isAfter(endDateTime)) {
+      return 'Past';
+    } else {
+      return 'Now';
+    }
+  }
+
   _statusText(String status) {
-    if (status == 'Upcomming') {
+    if (status.contains('Upcomming')) {
       return Text(
         '$status',
         style: TextStyle(fontSize: 16, color: Color(0xFF2962FF)),
       );
-    } else if (status == 'Now') {
+    } else if (status.contains('Now')) {
       return Text(
         '$status',
         style: TextStyle(fontSize: 16, color: Colors.red),
       );
-    } else {
+    } else if (status.contains('Past')) {
       return Text(
         '$status',
         style: TextStyle(fontSize: 16, color: Colors.grey),
       );
     }
+    return '';
+  }
+
+  _typeImage(String type) {
+    if (type == null) {
+      return 'images/type_exercise.png';
+    }
+
+    String path = 'exercise';
+    for (final val in TYPES) {
+      if (type.contains(val)) {
+        path = val;
+        break;
+      }
+    }
+    return 'images/type_$path.png';
+  }
+
+  _title(SearchItem item) {
+    if (item == null) return null;
+    return Container(
+      width: 300,
+      height: 28,
+      child: Text(
+        '${item.word}',
+        style: TextStyle(fontSize: 20, color: Colors.black),
+      ),
+    );
+  }
+
+  _location(SearchItem item) {
+    if (item == null) return null;
+    return Container(
+      width: 300,
+      child: Text(
+        '${item.location ?? ''}, ${item.districtName ?? ''}',
+        style: TextStyle(fontSize: 16, color: Colors.black54),
+      ),
+    );
+  }
+
+  _time(SearchItem item) {
+    return Container(
+      width: 300,
+      child: Row(
+        children: <Widget>[
+          _statusText(status),
+          Text(
+            '  ·  ${item.startTime} - ${item.endTime}  ${item.day} ${MONTH[item.month]}',
+            style: TextStyle(fontSize: 16, color: Colors.black),
+          )
+        ],
+      ),
+    );
   }
 }

@@ -65,7 +65,7 @@ class _searchBarState extends State<SearchBar> {
                 child: widget?.hideLeft ?? false
                     ? null
                     : Icon(
-                        Icons.arrow_back_ios,
+                        Icons.close,
                         color: Colors.grey,
                         size: 26,
                       ),
@@ -117,7 +117,7 @@ class _searchBarState extends State<SearchBar> {
             Container(
               padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
               child: Icon(
-                Icons.comment,
+                Icons.account_circle,
                 color: _homeFontColor(),
                 size: 26,
               ),
@@ -140,7 +140,7 @@ class _searchBarState extends State<SearchBar> {
       decoration: BoxDecoration(
           color: inputBoxColor,
           borderRadius: BorderRadius.circular(
-              widget.searchBarType == SearchBarType.normal ? 6 : 15)),
+              widget.searchBarType == SearchBarType.normal ? 6 : 6)),
       child: Row(
         children: <Widget>[
           Icon(

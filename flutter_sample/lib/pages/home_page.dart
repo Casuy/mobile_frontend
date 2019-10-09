@@ -3,6 +3,7 @@ import 'package:flutter_sample/dao/home_dao.dart';
 import 'package:flutter_sample/model/common_model.dart';
 import 'package:flutter_sample/model/grid_nav_model.dart';
 import 'package:flutter_sample/model/home_model.dart';
+import 'package:flutter_sample/pages/search_page.dart';
 import 'package:flutter_sample/widget/grid_nav.dart';
 import 'package:flutter_sample/widget/loading_container.dart';
 import 'package:flutter_sample/widget/local_nav.dart';
@@ -11,7 +12,7 @@ import 'package:flutter_sample/widget/webview.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
 const APPBAR_SCROLL_OFFSET = 100;
-const SEARCH_BAR_DEFAULT_TEXT = 'popolar events';
+const SEARCH_BAR_DEFAULT_TEXT = 'Try running, exercise';
 
 class HomePage extends StatefulWidget {
   @override
@@ -187,7 +188,17 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  _jumpToSearch() {}
+  _jumpToSearch() {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => SearchPage(
+                  hint: SEARCH_BAR_DEFAULT_TEXT,
+                )));
+  }
 
-  _jumpToSpeak() {}
+  _jumpToSpeak() {
+//    Navigator.push(
+//        context, MaterialPageRoute(builder: (context) => SpeakPage()));
+  }
 }

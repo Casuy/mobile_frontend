@@ -60,8 +60,8 @@ class _TabNavigatorState extends State<TabNavigator> {
                             ? _defaultColor
                             : _activeColor))),
             BottomNavigationBarItem(
-                icon: Icon(Icons.camera, color: _defaultColor),
-                activeIcon: Icon(Icons.camera, color: _activeColor),
+                icon: Icon(Icons.camera_alt, color: _defaultColor),
+                activeIcon: Icon(Icons.camera_alt, color: _activeColor),
                 title: Text('Community',
                     style: TextStyle(
                         fontSize: 16,
@@ -69,8 +69,8 @@ class _TabNavigatorState extends State<TabNavigator> {
                             ? _defaultColor
                             : _activeColor))),
             BottomNavigationBarItem(
-                icon: Icon(Icons.account_circle, color: _defaultColor),
-                activeIcon: Icon(Icons.account_circle, color: _activeColor),
+                icon: Icon(Icons.person, color: _defaultColor),
+                activeIcon: Icon(Icons.person, color: _activeColor),
                 title: Text('My',
                     style: TextStyle(
                         fontSize: 16,
