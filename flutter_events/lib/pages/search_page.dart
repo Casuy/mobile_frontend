@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_events/dao/search_dao.dart';
-import 'package:flutter_events/model/search_model.dart';
+import 'package:flutter_events/model/event_model.dart';
+import 'package:flutter_events/pages/event_detail_page.dart';
 import 'package:flutter_events/widget/search_bar.dart';
 import 'package:flutter_events/widget/webview.dart';
 
@@ -36,7 +37,7 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-  SearchModel searchModel;
+  EventModel searchModel;
   String keyword;
   String status = '';
 
@@ -98,7 +99,7 @@ class _SearchPageState extends State<SearchPage> {
       return;
     }
     String url = widget.searchUrl + text;
-    SearchDao.fetch(url, text).then((SearchModel model) {
+    SearchDao.fetch(url, text).then((EventModel model) {
       if (model.keyword == keyword) {
         setState(() {
           searchModel = model;
@@ -113,20 +114,15 @@ class _SearchPageState extends State<SearchPage> {
   _item(int position) {
     if (searchModel == null || searchModel.data == null) return null;
 
-    SearchItem item = searchModel.data[position];
+    EventItem item = searchModel.data[position];
 
     status = _setStatus(item);
 
     return GestureDetector(
       onTap: () {
         //TODO: go to detail page of a event
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => WebView(
-                      url: item.url,
-                      title: 'Detail',
-                    )));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => EventDetailPage(item: item,)));
       },
       child: Container(
         padding: EdgeInsets.fromLTRB(10, 5, 15, 13),
@@ -139,25 +135,26 @@ class _SearchPageState extends State<SearchPage> {
               width: 70,
               padding: EdgeInsets.only(right: 10),
               child: Column(
-              children: <Widget>[
-                //icon image
-                Container(
-                  alignment: Alignment.topCenter,
-                  child: Image(
-                      height: 33,
-                      width: 33,
-                      image: AssetImage(_typeImage(item.type))),
-                ),
-                //distance
-                Container(
-                  padding: EdgeInsets.only(bottom: 5),
-                  child: Text(
-                    '10.5 km',
-                    style: TextStyle(color: Colors.black45, fontSize: 14),
+                children: <Widget>[
+                  //icon image
+                  Container(
+                    alignment: Alignment.topCenter,
+                    child: Image(
+                        height: 33,
+                        width: 33,
+                        image: AssetImage(_typeImage(item.type))),
                   ),
-                )
-              ],
-            ),),
+                  //distance
+                  Container(
+                    padding: EdgeInsets.only(bottom: 5),
+                    child: Text(
+                      '10.5 km',
+                      style: TextStyle(color: Colors.black45, fontSize: 14),
+                    ),
+                  )
+                ],
+              ),
+            ),
             Column(
               children: <Widget>[
                 _title(item),
@@ -171,7 +168,7 @@ class _SearchPageState extends State<SearchPage> {
     );
   }
 
-  String _setStatus(SearchItem item) {
+  String _setStatus(EventItem item) {
     if (item == null) return '';
     var dateTime = new DateTime.now();
     var startDateTime =
@@ -223,7 +220,7 @@ class _SearchPageState extends State<SearchPage> {
     return 'images/type_$path.png';
   }
 
-  _title(SearchItem item) {
+  _title(EventItem item) {
     if (item == null) return null;
     return Container(
       padding: EdgeInsets.only(top: 5),
@@ -236,7 +233,7 @@ class _SearchPageState extends State<SearchPage> {
     );
   }
 
-  _location(SearchItem item) {
+  _location(EventItem item) {
     if (item == null) return null;
     return Container(
       width: 300,
@@ -247,7 +244,7 @@ class _SearchPageState extends State<SearchPage> {
     );
   }
 
-  _time(SearchItem item) {
+  _time(EventItem item) {
     return Container(
       width: 300,
       child: Row(

@@ -1,18 +1,18 @@
-class SearchModel {
+class EventModel {
   String keyword;
-  final List<SearchItem> data;
+  final List<EventItem> data;
 
-  SearchModel({this.data});
+  EventModel({this.data});
 
-  factory SearchModel.fromJson(Map<String, dynamic> json) {
+  factory EventModel.fromJson(Map<String, dynamic> json) {
     var dataJson = json['data'] as List;
-    List<SearchItem> data =
-        dataJson.map((i) => SearchItem.fromJson(i)).toList();
-    return SearchModel(data: data);
+    List<EventItem> data =
+        dataJson.map((i) => EventItem.fromJson(i)).toList();
+    return EventModel(data: data);
   }
 }
 
-class SearchItem {
+class EventItem {
   final String word; //Display name
   final String type; //Running
   final String startTime;
@@ -22,10 +22,10 @@ class SearchItem {
   final int lat;
   final int lon;
   final String location; //152 La Trobe Street
-  final String districtName; //Melb VIC
+  final String districtName; //Melbourne VIC
   final String url;
 
-  SearchItem(
+  EventItem(
       {this.word,
       this.type,
       this.startTime,
@@ -38,8 +38,8 @@ class SearchItem {
       this.districtName,
       this.url});
 
-  factory SearchItem.fromJson(Map<String, dynamic> json) {
-    return SearchItem(
+  factory EventItem.fromJson(Map<String, dynamic> json) {
+    return EventItem(
       word: json['word'],
       type: json['type'],
       startTime: json['startTime'],

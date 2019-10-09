@@ -119,7 +119,8 @@ class _WebViewState extends State<WebView> {
       );
     }
     return Container(
-      height: 55,
+      height: 60,
+      color: backgroundColor,
       child: FractionallySizedBox(
         widthFactor: 1,
         child: Stack(
