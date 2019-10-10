@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_events/dao/home_dao.dart';
 import 'package:flutter_events/model/common_model.dart';
@@ -11,6 +13,7 @@ import 'package:flutter_events/widget/search_bar.dart';
 import 'package:flutter_events/pages/speak_page.dart';
 import 'package:flutter_events/widget/webview.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 const APPBAR_SCROLL_OFFSET = 100;
 const SEARCH_BAR_DEFAULT_TEXT = 'Try running, exercise';
@@ -21,6 +24,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  PermissionStatus _locationStatus;
   double appBarOpacity = 0;
   List<CommonModel> localNavList = [];
   List<CommonModel> bannerList = [];
@@ -31,6 +35,25 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     _handleRefresh();
+    _askLocationPermission();
+  }
+
+  void _askLocationPermission() {
+    PermissionHandler().requestPermissions([PermissionGroup.location]).then(
+        _onStatusRequested);
+  }
+
+  void _onStatusRequested(Map<PermissionGroup, PermissionStatus> statuses) {
+    final status = statuses[PermissionGroup.location];
+    _updateStatus(status);
+  }
+
+  void _updateStatus(PermissionStatus status) {
+    if (status != _locationStatus) {
+      setState(() {
+        _locationStatus = status;
+      });
+    }
   }
 
   _onScroll(offset) {

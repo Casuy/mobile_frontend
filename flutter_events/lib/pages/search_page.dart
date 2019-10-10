@@ -3,7 +3,8 @@ import 'package:flutter_events/dao/search_dao.dart';
 import 'package:flutter_events/model/event_model.dart';
 import 'package:flutter_events/pages/event_detail_page.dart';
 import 'package:flutter_events/widget/search_bar.dart';
-import 'package:flutter_events/widget/webview.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 const URL = 'http://10.0.2.2:5000/search?keyword=';
 const MONTH = {
@@ -39,7 +40,12 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   EventModel searchModel;
   String keyword;
-  String status = '';
+
+  @override
+  void initState() {
+    super.initState();
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -116,13 +122,20 @@ class _SearchPageState extends State<SearchPage> {
 
     EventItem item = searchModel.data[position];
 
-    status = _setStatus(item);
+    String status = _setStatus(item);
+
+    Position target = new Position(latitude: item.lat, longitude: item.lon);
+    double distance = 0.0;
 
     return GestureDetector(
       onTap: () {
         //TODO: go to detail page of a event
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => EventDetailPage(item: item,)));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => EventDetailPage(
+                      item: item,
+                    )));
       },
       child: Container(
         padding: EdgeInsets.fromLTRB(10, 5, 15, 13),
@@ -147,19 +160,16 @@ class _SearchPageState extends State<SearchPage> {
                   //distance
                   Container(
                     padding: EdgeInsets.only(bottom: 5),
-                    child: Text(
-                      '10.5 km',
-                      style: TextStyle(color: Colors.black45, fontSize: 14),
-                    ),
+                    child: _distanceText(item, distance),
                   )
                 ],
               ),
             ),
             Column(
               children: <Widget>[
-                _title(item),
-                _location(item),
-                _time(item),
+                _titleText(item),
+                _locationText(item),
+                _timeText(item, status),
               ],
             )
           ],
@@ -168,7 +178,7 @@ class _SearchPageState extends State<SearchPage> {
     );
   }
 
-  String _setStatus(EventItem item) {
+  _setStatus(EventItem item) {
     if (item == null) return '';
     var dateTime = new DateTime.now();
     var startDateTime =
@@ -220,8 +230,8 @@ class _SearchPageState extends State<SearchPage> {
     return 'images/type_$path.png';
   }
 
-  _title(EventItem item) {
-    if (item == null) return null;
+  _titleText(EventItem item) {
+    if (item == null) return '';
     return Container(
       padding: EdgeInsets.only(top: 5),
       width: 300,
@@ -233,8 +243,8 @@ class _SearchPageState extends State<SearchPage> {
     );
   }
 
-  _location(EventItem item) {
-    if (item == null) return null;
+  _locationText(EventItem item) {
+    if (item == null) return '';
     return Container(
       width: 300,
       child: Text(
@@ -244,7 +254,8 @@ class _SearchPageState extends State<SearchPage> {
     );
   }
 
-  _time(EventItem item) {
+  _timeText(EventItem item, String status) {
+    if (item == null) return null;
     return Container(
       width: 300,
       child: Row(
@@ -258,4 +269,24 @@ class _SearchPageState extends State<SearchPage> {
       ),
     );
   }
+
+  _distanceText(EventItem item, double distance) {
+    String result;
+
+    if (item == null) return null;
+
+    if (distance < 100) {
+      result = '< 100 m';
+    } else if (distance >= 100 && distance < 1000) {
+      result = distance.round().toString() + ' m';
+    } else {
+      result = (distance / 1000).toStringAsFixed(1) + ' km';
+    }
+
+    return Text(
+      result,
+      style: TextStyle(color: Colors.black45, fontSize: 14),
+    );
+  }
+
 }

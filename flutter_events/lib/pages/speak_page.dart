@@ -1,117 +1,134 @@
-import 'package:flutter/material.dart';
-import 'package:speech_recognition/speech_recognition.dart';
+import 'dart:io';
 
-class SpeakPage extends StatefulWidget {
+import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
+
+class SpeakPage extends StatelessWidget {
   @override
-  _SpeakPageState createState() => _SpeakPageState();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Plugin example app'),
+          actions: <Widget>[
+            IconButton(
+              icon: const Icon(Icons.settings),
+              onPressed: () {
+                PermissionHandler().openAppSettings().then((bool hasOpened) =>
+                    debugPrint('App Settings opened: ' + hasOpened.toString()));
+              },
+            )
+          ],
+        ),
+        body: Center(
+          child: ListView(
+              children: PermissionGroup.values
+                  .where((PermissionGroup permission) {
+                if (Platform.isIOS) {
+                  return permission != PermissionGroup.unknown &&
+                      permission != PermissionGroup.sms &&
+                      permission != PermissionGroup.storage &&
+                      permission !=
+                          PermissionGroup.ignoreBatteryOptimizations;
+                } else {
+                  return permission != PermissionGroup.unknown &&
+                      permission != PermissionGroup.mediaLibrary &&
+                      permission != PermissionGroup.photos &&
+                      permission != PermissionGroup.reminders;
+                }
+              })
+                  .map((PermissionGroup permission) =>
+                  PermissionWidget(permission))
+                  .toList()),
+        ),
+      ),
+    );
+  }
 }
 
-class _SpeakPageState extends State<SpeakPage> {
-  SpeechRecognition _speechRecognition;
-  bool _isAvailable = false;
-  bool _isListening = false;
-  String resultText = "";
+class PermissionWidget extends StatefulWidget {
+  const PermissionWidget(this._permissionGroup);
+
+  final PermissionGroup _permissionGroup;
+
+  @override
+  _PermissionState createState() => _PermissionState(_permissionGroup);
+}
+
+class _PermissionState extends State<PermissionWidget> {
+  _PermissionState(this._permissionGroup);
+
+  final PermissionGroup _permissionGroup;
+  PermissionStatus _permissionStatus = PermissionStatus.unknown;
 
   @override
   void initState() {
     super.initState();
-    initSpeechRecognizer();
+
+    _listenForPermissionStatus();
   }
 
-  void initSpeechRecognizer() {
-    _speechRecognition = SpeechRecognition();
+  void _listenForPermissionStatus() {
+    final Future<PermissionStatus> statusFuture =
+    PermissionHandler().checkPermissionStatus(_permissionGroup);
 
-    _speechRecognition.setAvailabilityHandler(
-          (bool result) => setState(() => _isAvailable = result),
-    );
+    statusFuture.then((PermissionStatus status) {
+      setState(() {
+        _permissionStatus = status;
+      });
+    });
+  }
 
-    _speechRecognition.setRecognitionStartedHandler(
-          () => setState(() => _isListening = true),
-    );
-
-    _speechRecognition.setRecognitionResultHandler(
-          (String speech) => setState(() => resultText = speech),
-    );
-
-    _speechRecognition.setRecognitionCompleteHandler(
-          () => setState(() => _isListening = false),
-    );
-
-    _speechRecognition.activate().then(
-          (result) => setState(() => _isAvailable = result),
-    );
+  Color getPermissionColor() {
+    switch (_permissionStatus) {
+      case PermissionStatus.denied:
+        return Colors.red;
+      case PermissionStatus.granted:
+        return Colors.green;
+      default:
+        return Colors.grey;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                FloatingActionButton(
-                  heroTag: "btn0",
-
-                  child: Icon(Icons.cancel),
-                  mini: true,
-                  backgroundColor: Colors.deepOrange,
-                  onPressed: () {
-                    if (_isListening)
-                      _speechRecognition.cancel().then(
-                            (result) => setState(() {
-                          _isListening = result;
-                          resultText = "";
-                        }),
-                      );
-                  },
-                ),
-                FloatingActionButton(
-                  heroTag: "btn1",
-                  child: Icon(Icons.mic),
-                  onPressed: () {
-                    if (_isAvailable && !_isListening)
-                      _speechRecognition
-                          .listen(locale: "en_US")
-                          .then((result) => print('$result'));
-                  },
-                  backgroundColor: Colors.pink,
-                ),
-                FloatingActionButton(
-                  heroTag: "btn2",
-                  child: Icon(Icons.stop),
-                  mini: true,
-                  backgroundColor: Colors.deepPurple,
-                  onPressed: () {
-                    if (_isListening)
-                      _speechRecognition.stop().then(
-                            (result) => setState(() => _isListening = result),
-                      );
-                  },
-                ),
-              ],
-            ),
-            Container(
-              width: MediaQuery.of(context).size.width * 0.8,
-              decoration: BoxDecoration(
-                color: Colors.cyanAccent[100],
-                borderRadius: BorderRadius.circular(6.0),
-              ),
-              padding: EdgeInsets.symmetric(
-                vertical: 8.0,
-                horizontal: 12.0,
-              ),
-              child: Text(
-                resultText,
-                style: TextStyle(fontSize: 24.0),
-              ),
-            )
-          ],
-        ),
+    return ListTile(
+      title: Text(_permissionGroup.toString()),
+      subtitle: Text(
+        _permissionStatus.toString(),
+        style: TextStyle(color: getPermissionColor()),
       ),
+      trailing: IconButton(
+          icon: const Icon(Icons.info),
+          onPressed: () {
+            checkServiceStatus(context, _permissionGroup);
+          }),
+      onTap: () {
+        requestPermission(_permissionGroup);
+      },
     );
+  }
+
+  void checkServiceStatus(BuildContext context, PermissionGroup permission) {
+    PermissionHandler()
+        .checkServiceStatus(permission)
+        .then((ServiceStatus serviceStatus) {
+      final SnackBar snackBar =
+      SnackBar(content: Text(serviceStatus.toString()));
+
+      Scaffold.of(context).showSnackBar(snackBar);
+    });
+  }
+
+  Future<void> requestPermission(PermissionGroup permission) async {
+    final List<PermissionGroup> permissions = <PermissionGroup>[permission];
+    final Map<PermissionGroup, PermissionStatus> permissionRequestResult =
+    await PermissionHandler().requestPermissions(permissions);
+
+    setState(() {
+      print(permissionRequestResult);
+      _permissionStatus = permissionRequestResult[permission];
+      print(_permissionStatus);
+    });
   }
 }
