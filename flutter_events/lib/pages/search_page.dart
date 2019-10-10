@@ -44,7 +44,6 @@ class _SearchPageState extends State<SearchPage> {
   @override
   void initState() {
     super.initState();
-
   }
 
   @override
@@ -199,17 +198,17 @@ class _SearchPageState extends State<SearchPage> {
     if (status.contains('Upcoming')) {
       return Text(
         '$status',
-        style: TextStyle(fontSize: 16, color: Colors.blueAccent),
+        style: TextStyle(fontSize: 15, color: Colors.blueAccent),
       );
     } else if (status.contains('Now')) {
       return Text(
         '$status',
-        style: TextStyle(fontSize: 16, color: Colors.red),
+        style: TextStyle(fontSize: 15, color: Colors.red),
       );
     } else if (status.contains('Past')) {
       return Text(
         '$status',
-        style: TextStyle(fontSize: 16, color: Colors.grey),
+        style: TextStyle(fontSize: 15, color: Colors.grey),
       );
     }
     return '';
@@ -233,11 +232,11 @@ class _SearchPageState extends State<SearchPage> {
   _titleText(EventItem item) {
     if (item == null) return '';
     return Container(
-      padding: EdgeInsets.only(top: 5),
+      padding: EdgeInsets.fromLTRB(0, 5, 0, 3),
       width: 300,
-      height: 28,
       child: Text(
         '${item.title}',
+        overflow: TextOverflow.ellipsis,
         style: TextStyle(fontSize: 20, color: Colors.black),
       ),
     );
@@ -249,7 +248,8 @@ class _SearchPageState extends State<SearchPage> {
       width: 300,
       child: Text(
         '${item.address ?? ''}, ${item.districtName ?? ''}',
-        style: TextStyle(fontSize: 16, color: Colors.black54),
+        softWrap: true,
+        style: TextStyle(fontSize: 15, color: Colors.black54),
       ),
     );
   }
@@ -263,7 +263,7 @@ class _SearchPageState extends State<SearchPage> {
           _statusText(status),
           Text(
             '  ·  ${item.startTime} - ${item.endTime}  ${item.day} ${MONTH[item.month]}',
-            style: TextStyle(fontSize: 16, color: Colors.black),
+            style: TextStyle(fontSize: 15, color: Colors.black),
           )
         ],
       ),
@@ -288,5 +288,4 @@ class _SearchPageState extends State<SearchPage> {
       style: TextStyle(color: Colors.black45, fontSize: 14),
     );
   }
-
 }
