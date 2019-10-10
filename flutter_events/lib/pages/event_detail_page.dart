@@ -28,7 +28,6 @@ class _EventDetailPageState extends State<EventDetailPage> {
   _temp(BuildContext context) {
     return Stack(
       children: <Widget>[
-        _appBar(Colors.red, Colors.white),
         //TODO: display event detail
         MediaQuery.removePadding(
             context: context,
@@ -36,17 +35,19 @@ class _EventDetailPageState extends State<EventDetailPage> {
             child: ListView(
               children: <Widget>[
                 Container(
-                  height: 200,
+                  height: 300,
                   width: 450,
                   child: _map(context),
                 ),
                 Container(
                   width: 450,
+                  height: 500,
                   color: Colors.blue,
                   child: Text('Event detail ${widget.item.title}'),
                 )
               ],
-            ))
+            )),
+        _appBar(Colors.red, Colors.white),
       ],
     );
   }
