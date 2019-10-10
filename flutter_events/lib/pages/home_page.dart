@@ -200,6 +200,6 @@ class _HomePageState extends State<HomePage> {
 
   _jumpToSpeak() {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => SearchPage()));
+        context, MaterialPageRoute(builder: (context) => SpeakPage()));
   }
 }
