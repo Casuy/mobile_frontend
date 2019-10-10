@@ -21,8 +21,8 @@ class EventItem {
   final String day;
   final String month;
 
-  final int lat;
-  final int lon;
+  final double lat;
+  final double lon;
   final String address; //152 La Trobe Street
   final String districtName; //Melbourne VIC
 

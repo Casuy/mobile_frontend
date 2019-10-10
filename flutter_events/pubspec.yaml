@@ -28,6 +28,8 @@ dependencies:
   flutter_webview_plugin: ^0.3.8
   flutter_map: any
   latlong: ^0.6.1
+  speech_recognition: ^0.3.0
+  google_maps_flutter:
 
 
 dev_dependencies:
