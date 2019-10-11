@@ -57,7 +57,7 @@ class _EventDetailPageState extends State<EventDetailPage> {
       children: <Widget>[
         //map
         Container(
-          padding: EdgeInsets.only(top: 60),
+          padding: EdgeInsets.only(top: 63),
           height: 350,
           width: 450,
           child: _googleMap(),
@@ -83,7 +83,7 @@ class _EventDetailPageState extends State<EventDetailPage> {
 
   _appBar(Color backgroundColor, Color backButtonColor) {
     return Container(
-      height: 60,
+      height: 70,
       color: backgroundColor,
       child: FractionallySizedBox(
         widthFactor: 1,
@@ -95,7 +95,7 @@ class _EventDetailPageState extends State<EventDetailPage> {
                 Navigator.pop(context);
               },
               child: Container(
-                margin: EdgeInsets.only(left: 10, top: 26),
+                margin: EdgeInsets.fromLTRB(8, 35, 10, 5),
                 child: Icon(
                   Icons.close,
                   color: backButtonColor,
@@ -107,11 +107,11 @@ class _EventDetailPageState extends State<EventDetailPage> {
             Positioned(
               left: 0,
               right: 0,
-              top: 28,
+              top: 35,
               child: Center(
                 child: Text(
                   'Detail',
-                  style: TextStyle(color: backButtonColor, fontSize: 20),
+                  style: TextStyle(color: backButtonColor, fontSize: 22),
                 ),
               ),
             )
@@ -147,7 +147,7 @@ class _EventDetailPageState extends State<EventDetailPage> {
 
   _info() {
     return Container(
-      padding: EdgeInsets.fromLTRB(10, 20, 15, 10),
+      padding: EdgeInsets.fromLTRB(10, 23, 15, 10),
       child: Column(
         children: <Widget>[
           //title
@@ -177,14 +177,14 @@ class _EventDetailPageState extends State<EventDetailPage> {
         widget.item.title,
         textAlign: TextAlign.center,
         style: TextStyle(
-            color: Colors.black, fontSize: 40, fontWeight: FontWeight.w500),
+            color: Colors.black, fontSize: 40),
       ),
     );
   }
 
   _location() {
     return Container(
-      padding: EdgeInsets.only(bottom: 15),
+      padding: EdgeInsets.fromLTRB(5, 0, 0, 15),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -194,6 +194,7 @@ class _EventDetailPageState extends State<EventDetailPage> {
             size: 18,
           ),
           Container(
+            padding: EdgeInsets.only(left: 2),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -222,7 +223,7 @@ class _EventDetailPageState extends State<EventDetailPage> {
 
   _time() {
     return Container(
-      padding: EdgeInsets.only(bottom: 15),
+      padding: EdgeInsets.fromLTRB(5, 0, 0, 15),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -232,6 +233,7 @@ class _EventDetailPageState extends State<EventDetailPage> {
             size: 18,
           ),
           Container(
+            padding: EdgeInsets.only(left: 2),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[

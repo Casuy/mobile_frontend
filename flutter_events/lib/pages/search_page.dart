@@ -78,7 +78,7 @@ class _SearchPageState extends State<SearchPage> {
                   end: Alignment.bottomCenter)),
           child: Container(
             padding: EdgeInsets.only(top: 20),
-            height: 80,
+            height: 75,
             decoration: BoxDecoration(color: Colors.white),
             child: SearchBar(
               hideLeft: widget.hideLeft,
