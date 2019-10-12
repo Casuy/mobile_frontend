@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_events/model/common_model.dart';
 import 'package:flutter_events/model/grid_nav_model.dart';
+import 'package:flutter_events/pages/events_page.dart';
 
 class GridNav extends StatelessWidget {
   final GridNavModel gridNavModel;
@@ -48,9 +49,10 @@ class GridNav extends StatelessWidget {
     return Container(
       height: 150,
       margin: isFirst ? null : EdgeInsets.only(top: 7),
-      decoration: BoxDecoration(
-          //color linear gradient
-          gradient: LinearGradient(colors: [startColor, endColor])),
+      color: Colors.white,
+//      decoration: BoxDecoration(
+//          //color linear gradient
+//          gradient: LinearGradient(colors: [startColor, endColor])),
       child: Row(children: expandItems),
     );
   }
@@ -72,7 +74,7 @@ class GridNav extends StatelessWidget {
                 margin: EdgeInsets.only(top: 11),
                 child: Text(
                   model.title,
-                  style: TextStyle(fontSize: 18, color: Colors.white),
+                  style: TextStyle(fontSize: 18, color: Colors.black),
                 ))
           ],
         ),
@@ -92,7 +94,7 @@ class GridNav extends StatelessWidget {
   }
 
   _item(BuildContext context, CommonModel item, bool isFirst) {
-    BorderSide borderSide = BorderSide(width: 0.8, color: Colors.white);
+    BorderSide borderSide = BorderSide(width: 2, color: Color(0xfff2f2f2));
     return FractionallySizedBox(
       widthFactor: 1,
       child: Container(
@@ -106,7 +108,7 @@ class GridNav extends StatelessWidget {
               child: Text(
                 item.title,
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 16, color: Colors.white),
+                style: TextStyle(fontSize: 16, color: Colors.black),
               ),
             ),
             item),
@@ -117,20 +119,18 @@ class GridNav extends StatelessWidget {
   _wrapGesture(BuildContext context, Widget widget, CommonModel model) {
     return GestureDetector(
       onTap: () {
-//        Navigator.push(
-//          context,
-//          MaterialPageRoute(
-//            builder: (context) =>
-//              WebView(
-//                url: model.url,
-//                title: model.title,
-//                statusBarColor: model.statusBarColor,
-//                hideAppBar: model.hideAppBar,
-//              )
-//          )
-//        );
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) =>
+              EventsPage(
+                type: model.title,
+              )
+          )
+        );
       },
       child: widget,
     );
   }
+
 }
