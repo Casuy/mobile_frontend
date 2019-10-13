@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter_events/model/event_model.dart';
 import 'package:http/http.dart' as http;
 
-class SearchDao {
+class EventDao {
   static Future<EventModel> fetch(String url, String text) async {
     final response = await http.get(url);
     if (response.statusCode == 200) {
@@ -14,7 +14,7 @@ class SearchDao {
       model.keyword = text;
       return model;
     } else {
-      throw Exception('Failed to load search_page.json');
+      throw Exception('Failed to load events information.');
     }
   }
 }
