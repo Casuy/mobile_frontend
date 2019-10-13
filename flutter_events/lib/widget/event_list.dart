@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_events/model/event_model.dart';
+import 'package:flutter_events/model/event_item_model.dart';
+import 'package:flutter_events/model/search_model.dart';
 import 'package:flutter_events/pages/event_detail_page.dart';
 import 'package:geolocator/geolocator.dart';
 
 const TYPES = ['ball', 'bike', 'exercise', 'running', 'swim', 'yoga'];
 
 class EventList extends StatefulWidget{
-  final EventModel eventModel;
+  final SearchModel searchModel;
 
-  const EventList({Key key, this.eventModel}) : super(key: key);
+  const EventList({Key key, this.searchModel}) : super(key: key);
 
   @override
   _EventListState createState() => _EventListState();
@@ -23,16 +24,16 @@ class _EventListState extends State<EventList>{
 
   _eventsList() {
     return ListView.builder(
-        itemCount: widget.eventModel?.data?.length ?? 0,
+        itemCount: widget.searchModel?.data?.length ?? 0,
         itemBuilder: (BuildContext context, int position) {
           return _item(position);
         });
   }
 
   _item(int position) {
-    if (widget.eventModel == null || widget.eventModel.data == null) return null;
+    if (widget.searchModel == null || widget.searchModel.data == null) return null;
 
-    EventItem item = widget.eventModel.data[position];
+    EventItemModel item = widget.searchModel.data[position];
 
     String status = _setStatus(item);
 
@@ -89,7 +90,7 @@ class _EventListState extends State<EventList>{
     );
   }
 
-  _setStatus(EventItem item) {
+  _setStatus(EventItemModel item) {
     if (item == null) return '';
     var dateTime = new DateTime.now();
     var startDateTime =
@@ -121,7 +122,7 @@ class _EventListState extends State<EventList>{
     return 'images/type_$path.png';
   }
 
-  _distanceText(EventItem item, double distance) {
+  _distanceText(EventItemModel item, double distance) {
     String result;
 
     if (item == null) return null;
@@ -140,7 +141,7 @@ class _EventListState extends State<EventList>{
     );
   }
 
-  _titleText(EventItem item) {
+  _titleText(EventItemModel item) {
     if (item == null) return '';
     return Container(
       padding: EdgeInsets.fromLTRB(0, 5, 0, 3),
@@ -153,7 +154,7 @@ class _EventListState extends State<EventList>{
     );
   }
 
-  _locationText(EventItem item) {
+  _locationText(EventItemModel item) {
     if (item == null) return '';
     return Container(
       width: 300,
@@ -165,7 +166,7 @@ class _EventListState extends State<EventList>{
     );
   }
 
-  _timeText(EventItem item, String status) {
+  _timeText(EventItemModel item, String status) {
     if (item == null) return null;
     return Container(
       width: 300,

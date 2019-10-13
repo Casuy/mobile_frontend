@@ -16,24 +16,21 @@ class GridNav extends StatelessWidget {
   _gridNavItems(BuildContext context) {
     List<Widget> items = [];
     if (gridNavModel == null) return items;
-    if (gridNavModel.workout != null) {
-      items.add(_gridNavItem(context, gridNavModel.workout, true));
+    if (gridNavModel.all != null) {
+      items.add(
+        _gridNavItem1(context, gridNavModel.all, true),
+      );
+      items.add(
+        _gridNavItem2(context, gridNavModel.all, false),
+      );
     }
-    if (gridNavModel.activity != null) {
-      items.add(_gridNavItem(context, gridNavModel.activity, false));
-    }
-    if (gridNavModel.equipment != null) {
-      items.add(_gridNavItem(context, gridNavModel.equipment, false));
-    }
-
     return items;
   }
 
-  _gridNavItem(BuildContext context, GridNavItem gridNavItem, bool isFirst) {
+  _gridNavItem1(BuildContext context, GridNavItem gridNavItem, bool isFirst) {
     List<Widget> items = [];
     items.add(_mainItem(context, gridNavItem.mainItem));
     items.add(_doubleItems(context, gridNavItem.item1, gridNavItem.item2));
-    items.add(_doubleItems(context, gridNavItem.item3, gridNavItem.item4));
 
     List<Widget> expandItems = [];
     items.forEach((item) {
@@ -43,16 +40,31 @@ class GridNav extends StatelessWidget {
       ));
     });
 
-    Color startColor = Color(int.parse('0xff' + gridNavItem.startColor));
-    Color endColor = Color(int.parse('0xff' + gridNavItem.endColor));
+    return Container(
+      height: 300,
+      margin: isFirst ? null : EdgeInsets.only(top: 15),
+      color: Colors.white,
+      child: Row(children: expandItems),
+    );
+  }
+
+  _gridNavItem2(BuildContext context, GridNavItem gridNavItem, bool isFirst) {
+    List<Widget> items = [];
+    items.add(_doubleItems(context, gridNavItem.item3, gridNavItem.item4));
+    items.add(_doubleItems(context, gridNavItem.item5, gridNavItem.item6));
+
+    List<Widget> expandItems = [];
+    items.forEach((item) {
+      expandItems.add(Expanded(
+        child: item,
+        flex: 1,
+      ));
+    });
 
     return Container(
-      height: 150,
+      height: 300,
       margin: isFirst ? null : EdgeInsets.only(top: 7),
       color: Colors.white,
-//      decoration: BoxDecoration(
-//          //color linear gradient
-//          gradient: LinearGradient(colors: [startColor, endColor])),
       child: Row(children: expandItems),
     );
   }
@@ -66,7 +78,7 @@ class GridNav extends StatelessWidget {
             Image.network(
               model.icon,
               fit: BoxFit.contain,
-              height: 100,
+              height: 200,
               width: 120,
               alignment: AlignmentDirectional.bottomEnd,
             ),
@@ -94,7 +106,7 @@ class GridNav extends StatelessWidget {
   }
 
   _item(BuildContext context, CommonModel item, bool isFirst) {
-    BorderSide borderSide = BorderSide(width: 2, color: Color(0xfff2f2f2));
+    BorderSide borderSide = BorderSide(width: 7, color: Color(0xfff2f2f2));
     return FractionallySizedBox(
       widthFactor: 1,
       child: Container(
@@ -120,17 +132,13 @@ class GridNav extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) =>
-              EventsPage(
-                type: model.title,
-              )
-          )
-        );
+            context,
+            MaterialPageRoute(
+                builder: (context) => EventsPage(
+                      type: model.title,
+                    )));
       },
       child: widget,
     );
   }
-
 }

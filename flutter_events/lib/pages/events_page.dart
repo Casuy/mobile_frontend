@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_events/dao/event_dao.dart';
-import 'package:flutter_events/model/event_model.dart';
+import 'package:flutter_events/dao/search_dao.dart';
+import 'package:flutter_events/model/search_model.dart';
 import 'package:flutter_events/widget/event_list.dart';
 
 const URL = 'http://10.0.2.2:5000/events?type=';
@@ -17,8 +17,7 @@ class EventsPage extends StatefulWidget {
 }
 
 class _EventsPageState extends State<EventsPage> {
-  EventModel eventModel;
-
+  SearchModel searchModel;
 
   @override
   void initState() {
@@ -30,7 +29,7 @@ class _EventsPageState extends State<EventsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: EventList(eventModel: this.eventModel,),
+        child: EventList(searchModel: this.searchModel,),
       ),
     );
   }
@@ -38,14 +37,14 @@ class _EventsPageState extends State<EventsPage> {
   _getEventsByType() {
     if (widget.type.length == 0) {
       setState(() {
-        eventModel = null;
+        searchModel = null;
       });
       return;
     }
     String url = widget.eventsUrl + widget.type;
-    EventDao.fetch(url, '').then((EventModel model) {
+    SearchDao.fetch(url, '').then((SearchModel model) {
       setState(() {
-        eventModel = model;
+        searchModel = model;
       });
     }).catchError((e) {
       //TODO: Error page

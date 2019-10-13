@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_events/dao/event_dao.dart';
-import 'package:flutter_events/model/event_model.dart';
+import 'package:flutter_events/dao/search_dao.dart';
+import 'package:flutter_events/model/search_model.dart';
 import 'package:flutter_events/widget/event_list.dart';
 import 'package:flutter_events/widget/search_bar.dart';
 
@@ -22,7 +22,7 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-  EventModel eventModel;
+  SearchModel searchModel;
   String keyword;
 
   @override
@@ -42,7 +42,7 @@ class _SearchPageState extends State<SearchPage> {
               child: Expanded(
                   flex: 1,
                   child:
-                  EventList(eventModel: eventModel,)
+                  EventList(searchModel: searchModel,)
               )),
         ],
       ),
@@ -81,15 +81,15 @@ class _SearchPageState extends State<SearchPage> {
     keyword = text;
     if (text.length == 0) {
       setState(() {
-        eventModel = null;
+        searchModel = null;
       });
       return;
     }
     String url = widget.searchUrl + text;
-    EventDao.fetch(url, text).then((EventModel model) {
+    SearchDao.fetch(url, text).then((SearchModel model) {
       if (model.keyword == keyword) {
         setState(() {
-          eventModel = model;
+          searchModel = model;
         });
       }
     }).catchError((e) {

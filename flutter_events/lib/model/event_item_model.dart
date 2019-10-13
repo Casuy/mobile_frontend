@@ -1,17 +1,4 @@
-class EventModel {
-  String keyword;
-  final List<EventItem> data;
-
-  EventModel({this.data});
-
-  factory EventModel.fromJson(Map<String, dynamic> json) {
-    var dataJson = json['data'] as List;
-    List<EventItem> data = dataJson.map((i) => EventItem.fromJson(i)).toList();
-    return EventModel(data: data);
-  }
-}
-
-class EventItem {
+class EventItemModel {
   final String title; //Display name
   final String type; //Running
   final String description;
@@ -28,22 +15,22 @@ class EventItem {
 
   final String url;
 
-  EventItem(
+  EventItemModel(
       {this.title,
-      this.type,
-      this.description,
-      this.startTime,
-      this.endTime,
-      this.day,
-      this.month,
-      this.lat,
-      this.lon,
-      this.address,
-      this.districtName,
-      this.url});
+        this.type,
+        this.description,
+        this.startTime,
+        this.endTime,
+        this.day,
+        this.month,
+        this.lat,
+        this.lon,
+        this.address,
+        this.districtName,
+        this.url});
 
-  factory EventItem.fromJson(Map<String, dynamic> json) {
-    return EventItem(
+  factory EventItemModel.fromJson(Map<String, dynamic> json) {
+    return EventItemModel(
       title: json['title'],
       type: json['type'],
       description: json['description'],

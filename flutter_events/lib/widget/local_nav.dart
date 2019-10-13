@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_events/model/common_model.dart';
 import 'package:flutter_events/widget/webview.dart';
 
+const ICONS = ['Calendar', 'Joined', 'Nearby', 'Popular'];
+
 class LocalNav extends StatelessWidget {
   final List<CommonModel> localNavList;
 
@@ -34,7 +36,7 @@ class LocalNav extends StatelessWidget {
     );
   }
 
-  Widget _item(BuildContext context, CommonModel model) {
+  _item(BuildContext context, CommonModel model) {
     return GestureDetector(
       onTap: () {
 //TODO: navigate to H5?
@@ -52,11 +54,7 @@ class LocalNav extends StatelessWidget {
       },
       child: Column(
         children: <Widget>[
-          Image.network(
-            model.icon,
-            width: 50,
-            height: 50
-          ),
+          Image(height: 50,width: 50, image: AssetImage(_iconImage(model.title)),),
           Text(
             model.title,
             style: TextStyle(fontSize: 14),
@@ -64,6 +62,17 @@ class LocalNav extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  _iconImage(String icon) {
+    String path;
+    for (final val in ICONS) {
+      if (icon.contains(val)) {
+        path = val;
+        break;
+      }
+    }
+    return 'images/local_nav_$path.png';
   }
 
 }

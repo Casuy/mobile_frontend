@@ -56,10 +56,10 @@ flutter:
   #  - images/a_dot_ham.jpeg
 
   assets:
-   - images/local_nav_calendar.png
-   - images/local_nav_friends.png
-   - images/local_nav_nearby.png
-   - images/local_nav_record.png
+   - images/local_nav_Calendar.png
+   - images/local_nav_Joined.png
+   - images/local_nav_Nearby.png
+   - images/local_nav_Popular.png
    - images/type_ball.png
    - images/type_bike.png
    - images/type_exercise.png

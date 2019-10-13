@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_events/model/event_model.dart';
+import 'package:flutter_events/model/event_item_model.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 const MONTH = {
@@ -20,7 +20,7 @@ const MONTH = {
 };
 
 class EventDetailPage extends StatefulWidget {
-  final EventItem item;
+  final EventItemModel item;
 
   const EventDetailPage({Key key, this.item}) : super(key: key);
 
@@ -301,7 +301,7 @@ class _EventDetailPageState extends State<EventDetailPage> {
     );
   }
 
-  _setStatus(EventItem item) {
+  _setStatus(EventItemModel item) {
     if (item == null) return '';
     var dateTime = new DateTime.now();
     var startDateTime =
