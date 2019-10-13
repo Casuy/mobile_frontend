@@ -12,7 +12,6 @@ class EventItemModel {
   final double lon;
   final String address; //152 La Trobe Street
   final String districtName; //Melbourne VIC
-
   final String url;
 
   EventItemModel(

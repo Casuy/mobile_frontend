@@ -12,7 +12,6 @@ import 'package:flutter_events/widget/loading_container.dart';
 import 'package:flutter_events/widget/local_nav.dart';
 import 'package:flutter_events/widget/search_bar.dart';
 import 'package:flutter_events/pages/speak_page.dart';
-import 'package:flutter_events/widget/webview.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:permission_handler/permission_handler.dart';
 

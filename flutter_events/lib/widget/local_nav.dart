@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_events/model/common_model.dart';
-import 'package:flutter_events/widget/webview.dart';
 
 const ICONS = ['Calendar', 'Joined', 'Nearby', 'Popular'];
 

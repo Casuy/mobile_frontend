@@ -3,6 +3,7 @@ import 'package:flutter_events/pages/discover_page.dart';
 import 'package:flutter_events/pages/events_page.dart';
 import 'package:flutter_events/pages/home_page.dart';
 import 'package:flutter_events/pages/my_page.dart';
+import 'package:flutter_events/pages/search_page.dart';
 
 class TabNavigator extends StatefulWidget {
   @override
@@ -17,7 +18,6 @@ class _TabNavigatorState extends State<TabNavigator> {
     initialPage: 0,
   );
 
-
   @override
   void initState() {
     super.initState();
@@ -30,7 +30,16 @@ class _TabNavigatorState extends State<TabNavigator> {
       body: PageView(
         physics: NeverScrollableScrollPhysics(),
         controller: _controller,
-        children: <Widget>[HomePage(), DiscoverPage(), EventsPage(type: 'all',), MyPage()],
+        children: <Widget>[
+          HomePage(),
+          SearchPage(
+            hideLeft: true,
+          ),
+          EventsPage(
+            type: 'all',
+          ),
+          MyPage()
+        ],
       ),
       bottomNavigationBar: BottomNavigationBar(
           currentIndex: _currentIndex,
@@ -51,9 +60,9 @@ class _TabNavigatorState extends State<TabNavigator> {
                             ? _defaultColor
                             : _activeColor))),
             BottomNavigationBarItem(
-                icon: Icon(Icons.public, color: _defaultColor),
-                activeIcon: Icon(Icons.public, color: _activeColor),
-                title: Text('Discover',
+                icon: Icon(Icons.search, color: _defaultColor),
+                activeIcon: Icon(Icons.search, color: _activeColor),
+                title: Text('Search',
                     style: TextStyle(
                         fontSize: 16,
                         color: _currentIndex != 1

@@ -6,17 +6,17 @@ import 'package:geolocator/geolocator.dart';
 
 const TYPES = ['ball', 'bike', 'exercise', 'running', 'swim', 'yoga'];
 
-class EventList extends StatefulWidget{
+class EventList extends StatefulWidget {
   final SearchModel searchModel;
+  final bool hideIcon;
 
-  const EventList({Key key, this.searchModel}) : super(key: key);
+  const EventList({Key key, this.searchModel, this.hideIcon}) : super(key: key);
 
   @override
   _EventListState createState() => _EventListState();
 }
 
-class _EventListState extends State<EventList>{
-
+class _EventListState extends State<EventList> {
   @override
   Widget build(BuildContext context) {
     return _eventsList();
@@ -31,7 +31,8 @@ class _EventListState extends State<EventList>{
   }
 
   _item(int position) {
-    if (widget.searchModel == null || widget.searchModel.data == null) return null;
+    if (widget.searchModel == null || widget.searchModel.data == null)
+      return null;
 
     EventItemModel item = widget.searchModel.data[position];
 
@@ -46,8 +47,8 @@ class _EventListState extends State<EventList>{
             context,
             MaterialPageRoute(
                 builder: (context) => EventDetailPage(
-                  item: item,
-                )));
+                      item: item,
+                    )));
       },
       child: Container(
         padding: EdgeInsets.fromLTRB(10, 5, 15, 13),
@@ -64,10 +65,18 @@ class _EventListState extends State<EventList>{
                   //icon image
                   Container(
                     alignment: Alignment.topCenter,
-                    child: Image(
-                        height: 33,
-                        width: 33,
-                        image: AssetImage(_typeImage(item.type))),
+                    child: widget?.hideIcon ?? false
+                        ? UnconstrainedBox(
+                            child: Placeholder(
+                              fallbackWidth: 33,
+                              fallbackHeight: 25,
+                              color: Colors.transparent,
+                            ),
+                          )
+                        : Image(
+                            height: 33,
+                            width: 33,
+                            image: AssetImage(_typeImage(item.type))),
                   ),
                   //distance
                   Container(
@@ -94,9 +103,9 @@ class _EventListState extends State<EventList>{
     if (item == null) return '';
     var dateTime = new DateTime.now();
     var startDateTime =
-    DateTime.parse('2019-${item.month}-${item.day} ${item.startTime}:00');
+        DateTime.parse('2019-${item.month}-${item.day} ${item.startTime}:00');
     var endDateTime =
-    DateTime.parse('2019-${item.month}-${item.day} ${item.endTime}:00');
+        DateTime.parse('2019-${item.month}-${item.day} ${item.endTime}:00');
 
     if (dateTime.isBefore(startDateTime)) {
       return 'Upcoming';
@@ -201,5 +210,4 @@ class _EventListState extends State<EventList>{
     }
     return '';
   }
-
 }

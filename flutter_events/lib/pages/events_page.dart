@@ -8,6 +8,7 @@ const URL = 'http://10.0.2.2:5000/events?type=';
 class EventsPage extends StatefulWidget {
   final String eventsUrl;
   final String type;
+  final bool hideIcon = true;
 
   const EventsPage({Key key, this.eventsUrl = URL, this.type})
       : super(key: key);
@@ -29,7 +30,7 @@ class _EventsPageState extends State<EventsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: EventList(searchModel: this.searchModel,),
+        child: EventList(searchModel: this.searchModel, hideIcon: true,),
       ),
     );
   }

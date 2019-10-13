@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_events/model/common_model.dart';
-import 'package:flutter_events/widget/webview.dart';
 
 enum SearchBarType { home, normal, homeLight }
 
