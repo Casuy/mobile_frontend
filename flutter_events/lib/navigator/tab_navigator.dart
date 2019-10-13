@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_events/pages/default_page.dart';
 import 'package:flutter_events/pages/discover_page.dart';
 import 'package:flutter_events/pages/events_page.dart';
 import 'package:flutter_events/pages/home_page.dart';
 import 'package:flutter_events/pages/my_page.dart';
-import 'package:flutter_events/pages/search_page.dart';
 
 class TabNavigator extends StatefulWidget {
   @override
@@ -18,6 +16,13 @@ class _TabNavigatorState extends State<TabNavigator> {
   final PageController _controller = PageController(
     initialPage: 0,
   );
+
+
+  @override
+  void initState() {
+    super.initState();
+    //TODO: ask user to login & save id for Joined page.
+  }
 
   @override
   Widget build(BuildContext context) {

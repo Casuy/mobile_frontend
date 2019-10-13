@@ -43,7 +43,7 @@ class GridNav extends StatelessWidget {
     return Container(
       height: 300,
       margin: isFirst ? null : EdgeInsets.only(top: 15),
-      color: Colors.white,
+      color: Colors.red,
       child: Row(children: expandItems),
     );
   }
@@ -64,33 +64,9 @@ class GridNav extends StatelessWidget {
     return Container(
       height: 300,
       margin: isFirst ? null : EdgeInsets.only(top: 7),
-      color: Colors.white,
+      color: Colors.red,
       child: Row(children: expandItems),
     );
-  }
-
-  _mainItem(BuildContext context, CommonModel model) {
-    return _wrapGesture(
-        context,
-        Stack(
-          alignment: AlignmentDirectional.topCenter,
-          children: <Widget>[
-            Image.network(
-              model.icon,
-              fit: BoxFit.contain,
-              height: 200,
-              width: 120,
-              alignment: AlignmentDirectional.bottomEnd,
-            ),
-            Container(
-                margin: EdgeInsets.only(top: 11),
-                child: Text(
-                  model.title,
-                  style: TextStyle(fontSize: 18, color: Colors.black),
-                ))
-          ],
-        ),
-        model);
   }
 
   _doubleItems(
@@ -105,22 +81,51 @@ class GridNav extends StatelessWidget {
     );
   }
 
+  _mainItem(BuildContext context, CommonModel model) {
+    return _wrapGesture(
+        context,
+        Container(
+          child: Stack(
+            alignment: AlignmentDirectional.topCenter,
+            children: <Widget>[
+              Image.network(
+                model.icon,
+                fit: BoxFit.contain,
+                height: 200,
+                width: 120,
+                alignment: AlignmentDirectional.bottomEnd,
+              ),
+              Container(
+                  margin: EdgeInsets.only(top: 11),
+                  child: Text(
+                    model.title,
+                    style: TextStyle(fontSize: 20, color: Colors.white),
+                  ))
+            ],
+          ),
+        ),
+        model);
+  }
+
   _item(BuildContext context, CommonModel item, bool isFirst) {
-    BorderSide borderSide = BorderSide(width: 7, color: Color(0xfff2f2f2));
+    BorderSide borderSide = BorderSide(width: 0.5, color: Color(0xfff2f2f2));
     return FractionallySizedBox(
       widthFactor: 1,
       child: Container(
         decoration: BoxDecoration(
           border: Border(
-              left: borderSide, bottom: isFirst ? borderSide : BorderSide.none),
+              left: borderSide,
+              right: borderSide,
+              bottom: isFirst ? borderSide : BorderSide.none),
         ),
         child: _wrapGesture(
             context,
             Center(
               child: Text(
                 item.title,
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 16, color: Colors.black),
+                textAlign: TextAlign.left,
+                softWrap: true,
+                style: TextStyle(fontSize: 20, color: Colors.white),
               ),
             ),
             item),

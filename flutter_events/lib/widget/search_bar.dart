@@ -178,7 +178,8 @@ class _SearchBarState extends State<SearchBar> {
                       ),
                       widget.inputBoxClick)),
           !showClear
-              ? _wrapTap(
+              ?
+          _wrapTap(
                   Icon(
                     Icons.mic,
                     size: 22,

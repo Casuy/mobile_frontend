@@ -78,6 +78,11 @@ class _EventDetailPageState extends State<EventDetailPage> {
           ],
         ),
         _appBar(Colors.red, Colors.white),
+        Positioned(
+          top: 600,
+          left: 180,
+          child: FloatingActionButton(onPressed: () {}, child: Text('JOIN!')),
+        )
       ],
     );
   }
@@ -291,12 +296,24 @@ class _EventDetailPageState extends State<EventDetailPage> {
     return Container(
       decoration: BoxDecoration(
           border: Border(top: BorderSide(width: 0.3, color: Colors.grey))),
-      padding: EdgeInsets.fromLTRB(15, 15, 13, 0),
+      padding: EdgeInsets.fromLTRB(15, 15, 13, 50),
       alignment: Alignment.topLeft,
-      child: Text(
-        'PARTICIPANTS',
-        textAlign: TextAlign.left,
-        style: TextStyle(fontSize: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Container(
+            padding: EdgeInsets.only(bottom: 10),
+            child: Text(
+              'PARTICIPANTS',
+              textAlign: TextAlign.left,
+              style: TextStyle(fontSize: 20),
+            ),
+          ),
+          //TODO: list of participants, user names should be fine...
+          Container(child: Row(children: <Widget>[
+
+          ],),)
+        ],
       ),
     );
   }

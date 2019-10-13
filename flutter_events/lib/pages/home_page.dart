@@ -195,17 +195,18 @@ class _HomePageState extends State<HomePage> {
             child: Image.network(bannerList[index].icon, fit: BoxFit.fill),
             onTap: () {
               //TODO： go to a specific event page
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) {
-                  CommonModel model = bannerList[index];
-                  return WebView(
-                    url: model.url,
-                    title: model.title,
-                    hideAppBar: model.hideAppBar,
-                  );
-                }),
-              );
+//              Navigator.push(
+//                context,
+//                MaterialPageRoute(builder: (context) {
+//                  CommonModel model = bannerList[index];
+//                  return
+//                    WebView(
+//                    url: model.url,
+//                    title: model.title,
+//                    hideAppBar: model.hideAppBar,
+//                  );
+//                }),
+//              );
             },
           );
         },
