@@ -2,14 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_events/model/event_model.dart';
-
-//import 'package:flutter_map/flutter_map.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-//import 'package:latlong/latlong.dart';
 
-const TOKEN =
-    'pk.eyJ1IjoiY2FzdXkiLCJhIjoiY2sxanRwaWljMDcxMjNicGU2MnZyaHZneiJ9.E3_SYHBHZfbkH3tK5KVI5A';
 const MONTH = {
   '01': 'Jan',
   '02': 'Feb',
@@ -64,8 +58,15 @@ class _EventDetailPageState extends State<EventDetailPage> {
         ),
         //TODO: display event detail
         ListView(
-          padding: EdgeInsets.fromLTRB(10, 350, 10, 10),
+          padding: EdgeInsets.fromLTRB(15, 0, 15, 20),
           children: <Widget>[
+            UnconstrainedBox(
+              child: Placeholder(
+                fallbackHeight: 350,
+                fallbackWidth: 380,
+                color: Colors.transparent,
+              ),
+            ),
             //details
             Container(
               width: 450,
@@ -176,15 +177,14 @@ class _EventDetailPageState extends State<EventDetailPage> {
       child: Text(
         widget.item.title,
         textAlign: TextAlign.center,
-        style: TextStyle(
-            color: Colors.black, fontSize: 40),
+        style: TextStyle(color: Colors.black, fontSize: 40),
       ),
     );
   }
 
   _location() {
     return Container(
-      padding: EdgeInsets.fromLTRB(5, 0, 0, 15),
+      padding: EdgeInsets.fromLTRB(15, 0, 0, 15),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -199,12 +199,14 @@ class _EventDetailPageState extends State<EventDetailPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Container(
+                  width: 300,
                   child: Text(
-                  '${widget.item.address}, ${widget.item.districtName}',
-                  softWrap: true,
-                  textAlign: TextAlign.left,
-                  style: TextStyle(fontSize: 16),
-                ),),
+                    '${widget.item.address}, ${widget.item.districtName}',
+                    softWrap: true,
+                    textAlign: TextAlign.left,
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ),
                 Container(
                   padding: EdgeInsets.only(top: 3),
                   child: Text(
@@ -223,7 +225,7 @@ class _EventDetailPageState extends State<EventDetailPage> {
 
   _time() {
     return Container(
-      padding: EdgeInsets.fromLTRB(5, 0, 0, 15),
+      padding: EdgeInsets.fromLTRB(15, 0, 0, 15),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -237,12 +239,14 @@ class _EventDetailPageState extends State<EventDetailPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Container(child: Text(
-                  '${widget.item.startTime} - ${widget.item.endTime}  ${widget.item.day} ${MONTH[widget.item.month]}',
-                  softWrap: true,
-                  textAlign: TextAlign.left,
-                  style: TextStyle(fontSize: 16),
-                ),),
+                Container(
+                  child: Text(
+                    '${widget.item.startTime} - ${widget.item.endTime}  ${widget.item.day} ${MONTH[widget.item.month]}',
+                    softWrap: true,
+                    textAlign: TextAlign.left,
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ),
                 Container(
                   padding: EdgeInsets.only(top: 3),
                   child: _statusText(status),

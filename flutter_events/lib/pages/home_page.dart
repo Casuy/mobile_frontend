@@ -5,6 +5,7 @@ import 'package:flutter_events/dao/home_dao.dart';
 import 'package:flutter_events/model/common_model.dart';
 import 'package:flutter_events/model/grid_nav_model.dart';
 import 'package:flutter_events/model/home_model.dart';
+import 'package:flutter_events/pages/my_page.dart';
 import 'package:flutter_events/pages/search_page.dart';
 import 'package:flutter_events/widget/grid_nav.dart';
 import 'package:flutter_events/widget/loading_container.dart';
@@ -171,6 +172,7 @@ class _HomePageState extends State<HomePage> {
               speakClick: _jumpToSpeak,
               defaultText: SEARCH_BAR_DEFAULT_TEXT,
               leftButtonClick: () {},
+              rightButtonClick: _jumpToMy,
             ),
           ),
         ),
@@ -224,5 +226,9 @@ class _HomePageState extends State<HomePage> {
   _jumpToSpeak() {
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => SpeakPage()));
+  }
+
+  _jumpToMy() {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => MyPage()));
   }
 }

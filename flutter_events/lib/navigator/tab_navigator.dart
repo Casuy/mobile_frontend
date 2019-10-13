@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_events/pages/community_page.dart';
+import 'package:flutter_events/pages/default_page.dart';
+import 'package:flutter_events/pages/discover_page.dart';
+import 'package:flutter_events/pages/events_page.dart';
 import 'package:flutter_events/pages/home_page.dart';
 import 'package:flutter_events/pages/my_page.dart';
 import 'package:flutter_events/pages/search_page.dart';
@@ -23,14 +25,7 @@ class _TabNavigatorState extends State<TabNavigator> {
       body: PageView(
         physics: NeverScrollableScrollPhysics(),
         controller: _controller,
-        children: <Widget>[
-          HomePage(),
-          SearchPage(
-            hideLeft: true,
-          ),
-          CommunityPage(),
-          MyPage()
-        ],
+        children: <Widget>[HomePage(), DiscoverPage(), EventsPage(), MyPage()],
       ),
       bottomNavigationBar: BottomNavigationBar(
           currentIndex: _currentIndex,
@@ -51,18 +46,18 @@ class _TabNavigatorState extends State<TabNavigator> {
                             ? _defaultColor
                             : _activeColor))),
             BottomNavigationBarItem(
-                icon: Icon(Icons.search, color: _defaultColor),
-                activeIcon: Icon(Icons.search, color: _activeColor),
-                title: Text('Search',
+                icon: Icon(Icons.public, color: _defaultColor),
+                activeIcon: Icon(Icons.public, color: _activeColor),
+                title: Text('Discover',
                     style: TextStyle(
                         fontSize: 16,
                         color: _currentIndex != 1
                             ? _defaultColor
                             : _activeColor))),
             BottomNavigationBarItem(
-                icon: Icon(Icons.camera_alt, color: _defaultColor),
-                activeIcon: Icon(Icons.camera_alt, color: _activeColor),
-                title: Text('Community',
+                icon: Icon(Icons.apps, color: _defaultColor),
+                activeIcon: Icon(Icons.apps, color: _activeColor),
+                title: Text('Events',
                     style: TextStyle(
                         fontSize: 16,
                         color: _currentIndex != 2

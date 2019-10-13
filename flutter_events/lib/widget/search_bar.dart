@@ -94,18 +94,19 @@ class _SearchBarState extends State<SearchBar> {
       child: Row(children: <Widget>[
         _wrapTap(
             Container(
-                padding: EdgeInsets.fromLTRB(10, 5, 5, 5),
+                padding: EdgeInsets.fromLTRB(30, 5, 5, 5),
                 child: Row(
                   children: <Widget>[
-                    Text(
-                      'Melb',
-                      style: TextStyle(color: _homeFontColor(), fontSize: 20),
-                    ),
-                    Icon(
-                      Icons.expand_more,
-                      color: _homeFontColor(),
-                      size: 22,
-                    )
+                    // TODO: change district / city
+//                    Text(
+//                      'Melb',
+//                      style: TextStyle(color: _homeFontColor(), fontSize: 20),
+//                    ),
+//                    Icon(
+//                      Icons.expand_more,
+//                      color: _homeFontColor(),
+//                      size: 22,
+//                    )
                   ],
                 )),
             widget.leftButtonClick),

@@ -15,8 +15,8 @@ class EventItem {
   final String title; //Display name
   final String type; //Running
   final String description;
-  final String startTime;
 
+  final String startTime;
   final String endTime;
   final String day;
   final String month;
