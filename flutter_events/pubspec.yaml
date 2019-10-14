@@ -56,7 +56,7 @@ flutter:
   #  - images/a_dot_ham.jpeg
 
   assets:
-   - images/local_nav_Calendar.png
+   - images/local_nav_Recent.png
    - images/local_nav_Joined.png
    - images/local_nav_Nearby.png
    - images/local_nav_Popular.png

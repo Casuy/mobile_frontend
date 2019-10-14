@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_events/model/common_model.dart';
 
-const ICONS = ['Calendar', 'Joined', 'Nearby', 'Popular'];
+const ICONS = ['Recent', 'Joined', 'Nearby', 'Popular'];
 
 class LocalNav extends StatelessWidget {
-  final List<CommonModel> localNavList;
-
-  const LocalNav({Key key, @required this.localNavList}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,10 +20,9 @@ class LocalNav extends StatelessWidget {
   }
 
   _items(BuildContext context) {
-    if(localNavList == null) return null;
     List<Widget> items = [];
-    localNavList.forEach((model) {
-      items.add(_item(context, model));
+    ICONS.forEach((name) {
+      items.add(_item(context, name));
     });
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -35,7 +30,7 @@ class LocalNav extends StatelessWidget {
     );
   }
 
-  _item(BuildContext context, CommonModel model) {
+  _item(BuildContext context, String name) {
     return GestureDetector(
       onTap: () {
 //TODO: navigate to H5?
@@ -49,9 +44,9 @@ class LocalNav extends StatelessWidget {
       },
       child: Column(
         children: <Widget>[
-          Image(height: 50,width: 50, image: AssetImage(_iconImage(model.title)),),
+          Image(height: 50,width: 50, image: AssetImage(_iconImage(name)),),
           Text(
-            model.title,
+            name,
             style: TextStyle(fontSize: 14),
           )
         ],

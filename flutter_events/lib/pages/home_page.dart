@@ -82,7 +82,6 @@ class _HomePageState extends State<HomePage> {
     try {
       HomeModel model = await HomeDao.fetch();
       setState(() {
-        localNavList = model.localNavList;
         gridNavModel = model.gridNav;
         bannerList = model.bannerList;
         _loading = false;
@@ -136,7 +135,7 @@ class _HomePageState extends State<HomePage> {
         //local navigation
         Padding(
           padding: EdgeInsets.fromLTRB(0, 0, 0, 7),
-          child: LocalNav(localNavList: localNavList),
+          child: LocalNav(),
         ),
         //grid navigation
         GridNav(gridNavModel: gridNavModel),
