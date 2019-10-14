@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_events/navigator/tab_navigator.dart';
 import 'package:flutter_events/pages/login_page.dart';
 
 void main() => runApp(MyApp());

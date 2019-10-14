@@ -131,7 +131,7 @@ class _SignupPageState extends State<SignupPage> {
   _handleSubmit(String name, String password) async {
     //TODO: handle invalid input => prompt page
     if (name == '' || password == '') {
-      await promptPage.showMessage(context, "Unvalid input!");
+      await promptPage.showMessage(context, "Invalid input!");
       return;
     }
     String signupUrl =

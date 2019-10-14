@@ -3,6 +3,7 @@ import 'package:flutter_events/model/event_item_model.dart';
 import 'package:flutter_events/model/search_model.dart';
 import 'package:flutter_events/pages/event_detail_page.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:geolocator/geolocator.dart' as prefix0;
 
 const TYPES = ['ball', 'bike', 'exercise', 'running', 'swim', 'yoga'];
 
@@ -37,9 +38,6 @@ class _EventListState extends State<EventList> {
     EventItemModel item = widget.searchModel.data[position];
 
     String status = _setStatus(item);
-
-    Position target = new Position(latitude: item.lat, longitude: item.lon);
-    double distance = 0.0;
 
     return GestureDetector(
       onTap: () {
@@ -79,10 +77,16 @@ class _EventListState extends State<EventList> {
                             image: AssetImage(_typeImage(item.type))),
                   ),
                   //distance
-                  Container(
-                    padding: EdgeInsets.only(bottom: 5),
-                    child: _distanceText(item, distance),
-                  )
+                  FutureBuilder<Widget>(
+                      future: _distanceText(item),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<Widget> snapshot) {
+                        if (snapshot.hasData) return snapshot.data;
+                        return Text(
+                          'loading',
+                          style: TextStyle(color: Colors.black45, fontSize: 14),
+                        );
+                      })
                 ],
               ),
             ),
@@ -131,10 +135,16 @@ class _EventListState extends State<EventList> {
     return 'images/type_$path.png';
   }
 
-  _distanceText(EventItemModel item, double distance) {
-    String result;
-
+  Future<Widget> _distanceText(EventItemModel item) async {
     if (item == null) return null;
+    double distance;
+    String result;
+    Position current = await Geolocator()
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    Position target = new Position(latitude: item.lat, longitude: item.lon);
+
+    distance = await Geolocator().distanceBetween(
+        current.latitude, current.longitude, target.latitude, target.longitude);
 
     if (distance < 100) {
       result = '< 100 m';

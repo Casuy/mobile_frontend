@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_events/model/event_item_model.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 const MONTH = {
@@ -212,14 +213,16 @@ class _EventDetailPageState extends State<EventDetailPage> {
                     style: TextStyle(fontSize: 16),
                   ),
                 ),
-                Container(
-                  padding: EdgeInsets.only(top: 3),
-                  child: Text(
-                    'Distance',
-                    style: TextStyle(color: Colors.grey, fontSize: 15),
-                    textAlign: TextAlign.left,
-                  ),
-                )
+                FutureBuilder<Widget>(
+                    future: _distanceText(widget.item),
+                    builder:
+                        (BuildContext context, AsyncSnapshot<Widget> snapshot) {
+                      if (snapshot.hasData) return snapshot.data;
+                      return Text(
+                        'loading',
+                        style: TextStyle(color: Colors.black45, fontSize: 14),
+                      );
+                    }),
               ],
             ),
           )
@@ -310,9 +313,11 @@ class _EventDetailPageState extends State<EventDetailPage> {
             ),
           ),
           //TODO: list of participants, user names should be fine...
-          Container(child: Row(children: <Widget>[
-
-          ],),)
+          Container(
+            child: Row(
+              children: <Widget>[],
+            ),
+          )
         ],
       ),
     );
@@ -353,5 +358,34 @@ class _EventDetailPageState extends State<EventDetailPage> {
       );
     }
     return '';
+  }
+
+  Future<Widget> _distanceText(EventItemModel item) async {
+    if (item == null) return null;
+    double distance;
+    String result;
+    Position current = await Geolocator()
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    Position target = new Position(latitude: item.lat, longitude: item.lon);
+
+    distance = await Geolocator().distanceBetween(
+        current.latitude, current.longitude, target.latitude, target.longitude);
+
+    if (distance < 100) {
+      result = '< 100 m';
+    } else if (distance >= 100 && distance < 1000) {
+      result = distance.round().toString() + ' m';
+    } else {
+      result = (distance / 1000).toStringAsFixed(1) + ' km';
+    }
+
+    return Container(
+      padding: EdgeInsets.only(top: 3),
+      child: Text(
+        result,
+        style: TextStyle(color: Colors.black45, fontSize: 15),
+        textAlign: TextAlign.left,
+      ),
+    );
   }
 }

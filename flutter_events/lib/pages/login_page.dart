@@ -116,7 +116,7 @@ class _LoginPageState extends State<LoginPage> {
 
   _handleSubmit(String name, String password) async {
     if (name == '' || password == '') {
-      await promptPage.showMessage(context, "Unvalid input!");
+      await promptPage.showMessage(context, "Invalid input!");
       return;
     }
     String signupUrl =
@@ -130,7 +130,7 @@ class _LoginPageState extends State<LoginPage> {
         });
         _jumpToHomePage(userModel);
       } else if (model.errno == 1) {
-        await promptPage.showMessage(context, "Invalid password!");
+        await promptPage.showMessage(context, "Uncorrect username or password!");
         return;
       } else if (model.errno == 2) {
         await promptPage.showMessage(context, "Username does not exist!");
