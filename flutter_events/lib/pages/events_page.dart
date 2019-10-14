@@ -3,8 +3,8 @@ import 'package:flutter_events/dao/search_dao.dart';
 import 'package:flutter_events/model/search_model.dart';
 import 'package:flutter_events/widget/event_list.dart';
 
-//const URL = 'http://10.0.2.2:5000/events?type=';
-const URL = 'http://172.20.10.5:8080/http_server/events?type=';
+const URL = 'http://10.0.2.2:5000/events?type=';
+//const URL = 'http://172.20.10.5:8080/http_server/events?type=';
 
 class EventsPage extends StatefulWidget {
   final String eventsUrl;

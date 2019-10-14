@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter_events/model/signup_model.dart';
 import 'package:http/http.dart' as http;
 
-class SignupDao {
+class UserDao {
   static Future<SignupModel> fetch(String url) async {
     final response = await http.get(url);
     if (response.statusCode == 200) {
@@ -13,7 +13,7 @@ class SignupDao {
       SignupModel model = SignupModel.fromJson(result);
       return model;
     } else {
-      throw Exception('Failed to load sign up data');
+      throw Exception('Failed to load user data.');
     }
   }
 }

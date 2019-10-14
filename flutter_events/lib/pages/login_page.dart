@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_events/dao/signup_dao.dart';
+import 'package:flutter_events/dao/user_dao.dart';
 import 'package:flutter_events/model/signup_model.dart';
 import 'package:flutter_events/model/user_model.dart';
 import 'package:flutter_events/navigator/tab_navigator.dart';
@@ -25,9 +25,9 @@ class _LoginPageState extends State<LoginPage> {
       Opacity(
           opacity: 0.5,
           child: Container(
-            decoration: new BoxDecoration(
-              image: new DecorationImage(
-                image: new ExactAssetImage('images/sign_up_background.jpg'),
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: ExactAssetImage('images/sign_up_background.jpg'),
                 fit: BoxFit.cover,
               ),
             ),
@@ -116,9 +116,9 @@ class _LoginPageState extends State<LoginPage> {
 
   _handleSubmit(String username, String password) {
     String signupUrl =
-//        'http://10.0.2.2:5000/login?username=$username&password=$password';
-        'http://172.20.10.5:8080/http_server/login?name=$username&password=$password';
-    SignupDao.fetch(signupUrl).then((SignupModel model) async {
+        'http://10.0.2.2:5000/login?username=$username&password=$password';
+//        'http://172.20.10.5:8080/http_server/login?name=$username&password=$password';
+    UserDao.fetch(signupUrl).then((SignupModel model) async {
       print(model.errno);
       if (model.errno == 0) {
         setState(() {

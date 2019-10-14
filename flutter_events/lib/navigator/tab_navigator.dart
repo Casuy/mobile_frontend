@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_events/model/user_model.dart';
+import 'package:flutter_events/pages/add_event_page.dart';
 import 'package:flutter_events/pages/discover_page.dart';
 import 'package:flutter_events/pages/events_page.dart';
 import 'package:flutter_events/pages/home_page.dart';
@@ -41,8 +42,7 @@ class _TabNavigatorState extends State<TabNavigator> {
           SearchPage(
             hideLeft: true,
           ),
-          EventsPage(
-            type: 'all',
+          AddEventPage(
           ),
           MyPage()
         ],
@@ -75,9 +75,9 @@ class _TabNavigatorState extends State<TabNavigator> {
                             ? _defaultColor
                             : _activeColor))),
             BottomNavigationBarItem(
-                icon: Icon(Icons.apps, color: _defaultColor),
-                activeIcon: Icon(Icons.apps, color: _activeColor),
-                title: Text('Events',
+                icon: Icon(Icons.add_box, color: _defaultColor),
+                activeIcon: Icon(Icons.add_box, color: _activeColor),
+                title: Text('Add',
                     style: TextStyle(
                         fontSize: 16,
                         color: _currentIndex != 2

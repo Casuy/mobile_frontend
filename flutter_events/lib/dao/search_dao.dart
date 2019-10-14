@@ -14,7 +14,7 @@ class SearchDao {
       model.keyword = text;
       return model;
     } else {
-      throw Exception('Failed to load event data');
+      throw Exception('Failed to load event data.');
     }
   }
 }

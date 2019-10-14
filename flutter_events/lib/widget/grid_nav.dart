@@ -9,7 +9,7 @@ class GridNav extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: 7),
+      padding: EdgeInsets.only(left: 8.5),
       child: _gridNavItems(context),
     );
   }
@@ -43,10 +43,10 @@ class GridNav extends StatelessWidget {
   }
 
   _secondLine(BuildContext context) {
-    Widget firstDouble = _doubleItems(context, 'Ball', 'Bike');
-    Widget secondDouble = _doubleItems(context, 'Swim', 'Yogo');
+    Widget firstDouble = _doubleItems(context, 'Ball Sports', 'Swim');
+    Widget secondDouble = _doubleItems(context, 'Bike', 'Yoga / Pilates');
     return Container(
-      padding: EdgeInsets.only(top: 5),
+      padding: EdgeInsets.only(top: 3),
       child: Row(
         children: <Widget>[firstDouble, secondDouble],
       ),
@@ -62,22 +62,22 @@ class GridNav extends StatelessWidget {
   }
 
   _mainItem(BuildContext context) {
-    BorderSide borderSide = BorderSide(width: 5, color: Color(0xfff2f2f2));
-    return Container(
-      height: 200,
-      width: 200,
-      alignment: Alignment.bottomLeft,
-      decoration: BoxDecoration(
-        border: Border(right: borderSide),
+    BorderSide borderSide = BorderSide(width: 3, color: Color(0xfff2f2f2));
+    return _wrapGesture(
+        context,
+        Container(
+          height: 200,
+          width: 200,
+          alignment: Alignment.bottomLeft,
+          decoration: BoxDecoration(
+            border: Border(right: borderSide),
 //        color: Color(0xffe50914),
-        gradient: LinearGradient(
-            begin: Alignment.centerRight,
-            end: Alignment.centerLeft,
-            colors: [Color(0xffbe0027), Color(0xffe50914)]),
-      ),
-      child: _wrapGesture(
-          context,
-          Container(
+            gradient: LinearGradient(
+                begin: Alignment.centerRight,
+                end: Alignment.centerLeft,
+                colors: [Color(0xffbe0027), Color(0xffe50914)]),
+          ),
+          child: Container(
             padding: EdgeInsets.fromLTRB(20, 0, 0, 20),
             child: Text(
               'All',
@@ -85,37 +85,37 @@ class GridNav extends StatelessWidget {
               style: TextStyle(fontSize: 35, color: Colors.white),
             ),
           ),
-          'All'),
-    );
+        ),
+        'All');
   }
 
   _item(BuildContext context, String title, bool isFirst) {
-    BorderSide borderSide = BorderSide(width: 5, color: Color(0xfff2f2f2));
-    return Container(
-      height: 100,
-      width: 200,
-      alignment: Alignment.bottomLeft,
-      decoration: BoxDecoration(
+    BorderSide borderSide = BorderSide(width: 3, color: Color(0xfff2f2f2));
+    return _wrapGesture(
+        context,
+        Container(
+            height: 100,
+            width: 200,
+            alignment: Alignment.bottomLeft,
+            decoration: BoxDecoration(
 //        color: Color(0xffe50914),
-        gradient: LinearGradient(
-            begin: Alignment.centerLeft,
-            end: Alignment.centerRight,
-            colors: [Color(0xffe50914), Color(0xffbe0027)]),
-        border: Border(
-            right: borderSide, bottom: isFirst ? borderSide : BorderSide.none),
-      ),
-      child: _wrapGesture(
-          context,
-          Container(
-            padding: EdgeInsets.fromLTRB(20, 0, 0, 20),
-            child: Text(
-              title,
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 20, color: Colors.white),
-              softWrap: true,
+              gradient: LinearGradient(
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                  colors: [Color(0xffe50914), Color(0xffbe0027)]),
+              border: Border(
+                  right: borderSide,
+                  bottom: isFirst ? borderSide : BorderSide.none),
             ),
-          ),
-          title),
-    );
+            child: Container(
+              padding: EdgeInsets.fromLTRB(20, 0, 0, 20),
+              child: Text(
+                title,
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 20, color: Colors.white),
+                softWrap: true,
+              ),
+            )),
+        title);
   }
 }
