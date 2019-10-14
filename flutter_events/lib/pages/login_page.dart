@@ -114,9 +114,13 @@ class _LoginPageState extends State<LoginPage> {
     });
   }
 
-  _handleSubmit(String username, String password) {
+  _handleSubmit(String name, String password) async {
+    if (name == '' || password == '') {
+      await promptPage.showMessage(context, "Unvalid input!");
+      return;
+    }
     String signupUrl =
-        'http://10.0.2.2:5000/login?username=$username&password=$password';
+        'http://10.0.2.2:5000/login?name=$name&password=$password';
 //        'http://172.20.10.5:8080/http_server/login?name=$username&password=$password';
     UserDao.fetch(signupUrl).then((SignupModel model) async {
       print(model.errno);
@@ -129,8 +133,7 @@ class _LoginPageState extends State<LoginPage> {
         await promptPage.showMessage(context, "Invalid password!");
         return;
       } else if (model.errno == 2) {
-        await promptPage.showMessage(
-            context, "Username does not exist!");
+        await promptPage.showMessage(context, "Username does not exist!");
       }
     });
   }

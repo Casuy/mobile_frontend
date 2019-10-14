@@ -128,10 +128,14 @@ class _SignupPageState extends State<SignupPage> {
     ]));
   }
 
-  _handleSubmit(String username, String password) {
+  _handleSubmit(String name, String password) async {
     //TODO: handle invalid input => prompt page
+    if (name == '' || password == '') {
+      await promptPage.showMessage(context, "Unvalid input!");
+      return;
+    }
     String signupUrl =
-        'http://10.0.2.2:5000/signup?username=$username&password=$password';
+        'http://10.0.2.2:5000/signup?name=$name&password=$password';
 //    'http://172.20.10.5:8080/http_server/signup?name=$username&password=$password';
     UserDao.fetch(signupUrl).then((SignupModel model) async {
       print(model.errno);
@@ -140,11 +144,10 @@ class _SignupPageState extends State<SignupPage> {
           userModel = model.data;
         });
         _jumpToHomePage(userModel);
-      } else if (model.errno == 1){
-        await promptPage.showMessage(
-            context, "Username already exists!");
+      } else if (model.errno == 1) {
+        await promptPage.showMessage(context, "Username already exists!");
         return;
-      } else if(model.errno == 2){
+      } else if (model.errno == 2) {
         await promptPage.showMessage(
             context, "Username or password format is incorrect!");
       }
