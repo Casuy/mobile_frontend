@@ -1,33 +1,26 @@
-import 'package:flutter_events/model/common_model.dart';
-import 'package:flutter_events/model/grid_nav_model.dart';
+import 'package:flutter_events/model/event_item_model.dart';
 
 class HomeModel {
-  final List<CommonModel> bannerList;
-  final GridNavModel gridNav;
+  final List<EventItemModel> data;
 
   HomeModel({
-    this.bannerList,
-    this.gridNav,
+    this.data,
   });
 
   factory HomeModel.fromJson(Map<String, dynamic> json) {
-
-    var bannerListJson = json['bannerList'] as List;
-    List<CommonModel> bannerList =
-        bannerListJson.map((i) => CommonModel.fromJson(i)).toList();
-
+    var dataJson = json['data'] as List;
+    List<EventItemModel> data =
+        dataJson.map((i) => EventItemModel.fromJson(i)).toList();
 
     return HomeModel(
-      bannerList: bannerList,
-      gridNav: GridNavModel.fromJson(json['gridNav']),
+      data: data,
     );
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
 
-    data['bannerList'] = this.bannerList;
-    data['gridNav'] = this.gridNav;
+    data['data'] = this.data;
 
     return data;
   }

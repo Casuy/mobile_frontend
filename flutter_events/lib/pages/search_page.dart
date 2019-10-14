@@ -4,7 +4,8 @@ import 'package:flutter_events/model/search_model.dart';
 import 'package:flutter_events/widget/event_list.dart';
 import 'package:flutter_events/widget/search_bar.dart';
 
-const URL = 'http://10.0.2.2:5000/search?keyword=';
+//const URL = 'http://10.0.2.2:5000/search?keyword=';
+const URL = 'http://172.20.10.5:8080/http_server/search?keyword=';
 const TYPES = ['ball', 'bike', 'exercise', 'running', 'swim', 'yoga'];
 
 class SearchPage extends StatefulWidget {

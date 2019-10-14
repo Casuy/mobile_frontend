@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_events/pages/events_page.dart';
 
 const ICONS = ['Recent', 'Joined', 'Nearby', 'Popular'];
+const URL = 'http://10.0.2.2:5000/';
 
 class LocalNav extends StatelessWidget {
 
@@ -33,14 +35,20 @@ class LocalNav extends StatelessWidget {
   _item(BuildContext context, String name) {
     return GestureDetector(
       onTap: () {
-//TODO: navigate to H5?
-//        Navigator.push(
-//          context,
-//          MaterialPageRoute(
-//            builder: (context) =>
-//
-//          )
-//        );
+//TODO: navigate to different pages (google map for nearby) (joined: userId)
+        String url = URL + name.toLowerCase();
+        print(url);
+//        if(name.contains('Nearby')){
+
+//        } else {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                  EventsPage(eventsUrl: url, hideIcon: false,)
+              )
+          );
+//        }
       },
       child: Column(
         children: <Widget>[

@@ -3,14 +3,15 @@ import 'package:flutter_events/dao/search_dao.dart';
 import 'package:flutter_events/model/search_model.dart';
 import 'package:flutter_events/widget/event_list.dart';
 
-const URL = 'http://10.0.2.2:5000/events?type=';
+//const URL = 'http://10.0.2.2:5000/events?type=';
+const URL = 'http://172.20.10.5:8080/http_server/events?type=';
 
 class EventsPage extends StatefulWidget {
   final String eventsUrl;
   final String type;
-  final bool hideIcon = true;
+  final bool hideIcon;
 
-  const EventsPage({Key key, this.eventsUrl = URL, this.type})
+  const EventsPage({Key key, this.eventsUrl = URL, this.type, this.hideIcon=true})
       : super(key: key);
 
   @override
@@ -23,26 +24,31 @@ class _EventsPageState extends State<EventsPage> {
   @override
   void initState() {
     super.initState();
-    _getEventsByType();
+    _fetchData();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: EventList(searchModel: this.searchModel, hideIcon: true,),
+        child: EventList(searchModel: this.searchModel),
       ),
     );
   }
 
-  _getEventsByType() {
-    if (widget.type.length == 0) {
-      setState(() {
-        searchModel = null;
-      });
-      return;
+  _fetchData() {
+//    if (widget.type.length == 0) {
+//      setState(() {
+//        searchModel = null;
+//      });
+//      return;
+//    }
+
+    String url= widget.eventsUrl;
+
+    if(widget.type != null) {
+      url = widget.eventsUrl + widget.type;
     }
-    String url = widget.eventsUrl + widget.type;
     SearchDao.fetch(url, '').then((SearchModel model) {
       setState(() {
         searchModel = model;

@@ -56,6 +56,7 @@ flutter:
   #  - images/a_dot_ham.jpeg
 
   assets:
+   - images/sign_up_background.jpg
    - images/local_nav_Recent.png
    - images/local_nav_Joined.png
    - images/local_nav_Nearby.png

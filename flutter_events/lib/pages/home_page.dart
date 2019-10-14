@@ -1,10 +1,10 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_events/dao/home_dao.dart';
-import 'package:flutter_events/model/common_model.dart';
-import 'package:flutter_events/model/grid_nav_model.dart';
+import 'package:flutter_events/model/event_item_model.dart';
 import 'package:flutter_events/model/home_model.dart';
+import 'package:flutter_events/model/user_model.dart';
+import 'package:flutter_events/pages/event_detail_page.dart';
 import 'package:flutter_events/pages/my_page.dart';
 import 'package:flutter_events/pages/search_page.dart';
 import 'package:flutter_events/widget/grid_nav.dart';
@@ -19,6 +19,10 @@ const APPBAR_SCROLL_OFFSET = 100;
 const SEARCH_BAR_DEFAULT_TEXT = 'Try running, exercise';
 
 class HomePage extends StatefulWidget {
+  final UserModel userModel;
+
+  const HomePage({Key key, this.userModel}) : super(key: key);
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -26,9 +30,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   PermissionStatus _locationStatus;
   double appBarOpacity = 0;
-  List<CommonModel> localNavList = [];
-  List<CommonModel> bannerList = [];
-  GridNavModel gridNavModel;
+  List<EventItemModel> bannerList = [];
   bool _loading = true;
 
   @override
@@ -82,8 +84,7 @@ class _HomePageState extends State<HomePage> {
     try {
       HomeModel model = await HomeDao.fetch();
       setState(() {
-        gridNavModel = model.gridNav;
-        bannerList = model.bannerList;
+        bannerList = model.data;
         _loading = false;
       });
     } catch (e) {
@@ -138,7 +139,7 @@ class _HomePageState extends State<HomePage> {
           child: LocalNav(),
         ),
         //grid navigation
-        GridNav(gridNavModel: gridNavModel),
+        GridNav(),
       ],
     );
   }
@@ -190,21 +191,17 @@ class _HomePageState extends State<HomePage> {
         autoplay: true,
         itemBuilder: (BuildContext context, int index) {
           return GestureDetector(
-            child: Image.network(bannerList[index].icon, fit: BoxFit.fill),
+            child: Image.network(bannerList[index].url, fit: BoxFit.fill),
             onTap: () {
               //TODO： go to a specific event page
-//              Navigator.push(
-//                context,
-//                MaterialPageRoute(builder: (context) {
-//                  CommonModel model = bannerList[index];
-//                  return
-//                    WebView(
-//                    url: model.url,
-//                    title: model.title,
-//                    hideAppBar: model.hideAppBar,
-//                  );
-//                }),
-//              );
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) {
+                  EventItemModel model = bannerList[index];
+                  return
+                    EventDetailPage(item: model,);
+                }),
+              );
             },
           );
         },

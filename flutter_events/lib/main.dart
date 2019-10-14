@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_events/navigator/tab_navigator.dart';
+import 'package:flutter_events/pages/login_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.red,
       ),
-      home: TabNavigator(),
+      home: LoginPage(),
     );
   }
 }

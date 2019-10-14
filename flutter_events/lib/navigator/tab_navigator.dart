@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_events/model/user_model.dart';
 import 'package:flutter_events/pages/discover_page.dart';
 import 'package:flutter_events/pages/events_page.dart';
 import 'package:flutter_events/pages/home_page.dart';
@@ -6,11 +7,17 @@ import 'package:flutter_events/pages/my_page.dart';
 import 'package:flutter_events/pages/search_page.dart';
 
 class TabNavigator extends StatefulWidget {
+
+  final UserModel userModel;
+
+  const TabNavigator({Key key, this.userModel}) : super(key: key);
+
   @override
   _TabNavigatorState createState() => _TabNavigatorState();
 }
 
 class _TabNavigatorState extends State<TabNavigator> {
+
   final _defaultColor = Colors.grey;
   final _activeColor = Colors.black;
   int _currentIndex = 0;
@@ -21,7 +28,6 @@ class _TabNavigatorState extends State<TabNavigator> {
   @override
   void initState() {
     super.initState();
-    //TODO: ask user to login & save id for Joined page.
   }
 
   @override
@@ -31,7 +37,7 @@ class _TabNavigatorState extends State<TabNavigator> {
         physics: NeverScrollableScrollPhysics(),
         controller: _controller,
         children: <Widget>[
-          HomePage(),
+          HomePage(userModel: widget.userModel,),
           SearchPage(
             hideLeft: true,
           ),
