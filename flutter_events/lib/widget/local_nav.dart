@@ -5,7 +5,6 @@ const ICONS = ['Recent', 'Joined', 'Nearby', 'Popular'];
 const URL = 'http://10.0.2.2:5000/';
 
 class LocalNav extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -14,10 +13,7 @@ class LocalNav extends StatelessWidget {
         color: Colors.white,
 //        borderRadius: BorderRadius.all(Radius.circular(6))
       ),
-      child: Padding(
-        padding: EdgeInsets.all(7),
-        child: _items(context)
-      ),
+      child: Padding(padding: EdgeInsets.all(7), child: _items(context)),
     );
   }
 
@@ -27,9 +23,7 @@ class LocalNav extends StatelessWidget {
       items.add(_item(context, name));
     });
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: items
-    );
+        mainAxisAlignment: MainAxisAlignment.spaceAround, children: items);
   }
 
   _item(BuildContext context, String name) {
@@ -41,18 +35,23 @@ class LocalNav extends StatelessWidget {
 //        if(name.contains('Nearby')){
 
 //        } else {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                  EventsPage(eventsUrl: url, hideIcon: false,)
-              )
-          );
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => EventsPage(
+                      url: url,
+                      hideIcon: false,
+                      title: name,
+                    )));
 //        }
       },
       child: Column(
         children: <Widget>[
-          Image(height: 50,width: 50, image: AssetImage(_iconImage(name)),),
+          Image(
+            height: 50,
+            width: 50,
+            image: AssetImage(_iconImage(name)),
+          ),
           Text(
             name,
             style: TextStyle(fontSize: 14),
@@ -72,5 +71,4 @@ class LocalNav extends StatelessWidget {
     }
     return 'images/local_nav_$path.png';
   }
-
 }

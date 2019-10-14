@@ -22,6 +22,7 @@ class GridNav extends StatelessWidget {
             MaterialPageRoute(
                 builder: (context) => EventsPage(
                       type: title.toLowerCase(),
+                      title: title,
                     )));
       },
       child: widget,
@@ -38,15 +39,18 @@ class GridNav extends StatelessWidget {
     Widget mainItem = _mainItem(context);
     Widget doubleItems = _doubleItems(context, 'Exercise', 'Running');
     return Row(
-      children: <Widget>[mainItem, Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.centerRight,
-              end: Alignment.centerLeft,
-              colors: [Color(0xffbe0027), Color(0xffff0000)]),
+      children: <Widget>[
+        mainItem,
+        Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+                colors: [Color(0xffbe0027), Color(0xffff0000)]),
+          ),
+          child: doubleItems,
         ),
-        child: doubleItems,
-      ),],
+      ],
     );
   }
 
@@ -60,8 +64,8 @@ class GridNav extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
+                  begin: Alignment.bottomLeft,
+                  end: Alignment.topRight,
                   colors: [Color(0xffbe0027), Color(0xffff0000)]),
             ),
             child: firstDouble,
@@ -69,8 +73,8 @@ class GridNav extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                  begin: Alignment.centerRight,
-                  end: Alignment.centerLeft,
+                  begin: Alignment.bottomRight,
+                  end: Alignment.topLeft,
                   colors: [Color(0xffbe0027), Color(0xffff0000)]),
             ),
             child: secondDouble,
@@ -99,8 +103,8 @@ class GridNav extends StatelessWidget {
           decoration: BoxDecoration(
             border: Border(right: borderSide),
             gradient: LinearGradient(
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
                 colors: [Color(0xffbe0027), Color(0xffff0000)]),
           ),
           child: Container(
