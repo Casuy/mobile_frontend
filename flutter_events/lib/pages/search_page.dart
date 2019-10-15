@@ -78,6 +78,9 @@ class _SearchPageState extends State<SearchPage> {
               leftButtonClick: () {
                 Navigator.pop(context);
               },
+              rightButtonClick: () {
+                FocusScope.of(context).requestFocus(FocusNode());
+              },
               onChanged: _onTextChange,
             ),
           ),

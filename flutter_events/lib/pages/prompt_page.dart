@@ -5,7 +5,7 @@ class PromptPage {
     showDialog<Null>(
         context: context,
         child: AlertDialog(
-            title: Text("Alert"),
+            title: Text("EVENT"),
             content: Text(text),
             actions: <Widget>[
               FlatButton(

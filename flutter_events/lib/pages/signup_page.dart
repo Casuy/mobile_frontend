@@ -138,7 +138,7 @@ class _SignupPageState extends State<SignupPage> {
         'http://10.0.2.2:5000/signup?name=$name&password=$password';
 //    'http://172.20.10.5:8080/http_server/signup?name=$username&password=$password';
     UserDao.fetch(signupUrl).then((SignupModel model) async {
-      print(model.errno);
+      print(model.toJson());
       if (model.errno == 0) {
         setState(() {
           userModel = model.data;

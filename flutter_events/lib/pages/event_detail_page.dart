@@ -1,8 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_events/dao/user_operation_dao.dart';
 import 'package:flutter_events/model/event_item_model.dart';
 import 'package:flutter_events/model/user_model.dart';
+import 'package:flutter_events/model/user_operation_model.dart';
+import 'package:flutter_events/pages/prompt_page.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -34,11 +37,15 @@ class EventDetailPage extends StatefulWidget {
 class _EventDetailPageState extends State<EventDetailPage> {
   String status;
   double distance;
+  var _onPressed;
+  bool _isButtonDisabled;
+  PromptPage promptPage = new PromptPage();
 
   @override
   void initState() {
     super.initState();
     this.status = _setStatus(widget.item);
+    this._isButtonDisabled = false;
   }
 
   @override
@@ -83,8 +90,8 @@ class _EventDetailPageState extends State<EventDetailPage> {
         _appBar(Colors.red, Colors.white),
         Positioned(
           top: 600,
-          left: 180,
-          child: FloatingActionButton(onPressed: () {}, child: Text('JOIN!')),
+          left: 160,
+          child: _joinButton(widget.item, status, widget.userModel),
         )
       ],
     );
@@ -388,6 +395,50 @@ class _EventDetailPageState extends State<EventDetailPage> {
         style: TextStyle(color: Colors.black45, fontSize: 15),
         textAlign: TextAlign.left,
       ),
+    );
+  }
+
+  _joinButton(EventItemModel item, String status, UserModel user) {
+    String text = 'JOIN!';
+    Color buttonColor = Colors.red;
+    List<int> joinedEventIds = [];
+    if (user.joinedEvents.length != 0) {
+      joinedEventIds = user.joinedEvents.map((event) => event.eventId).toList();
+      print(joinedEventIds);
+    }
+
+    if (status.contains('Past')) {
+      _onPressed = null;
+      text = 'EXPIRED';
+      buttonColor = Colors.grey;
+    } else if (joinedEventIds.contains(item.eventId)) {
+      _onPressed = null;
+      text = 'JOINED';
+      buttonColor = Colors.grey;
+    } else {
+      text = 'JOIN NOW!';
+      _onPressed = () {
+        String url =
+            'http://10.0.2.2:5000/join?userId=${user.userId}&eventId=${item.eventId}';
+        UserOperationDao.fetch(url).then((UserOperationModel model) async {
+          print(model.errno);
+          if (model.errno == 0) {
+            await promptPage.showMessage(context, "Event joined!");
+            setState(() {
+              user.joinedEvents.add(item);
+            });
+          }
+        }).catchError((e) {});
+      };
+    }
+
+    return RaisedButton(
+      onPressed: _onPressed,
+      child: Text(
+        text,
+        style: TextStyle(color: Colors.white),
+      ),
+      color: buttonColor,
     );
   }
 }

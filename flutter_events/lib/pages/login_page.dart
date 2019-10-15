@@ -123,7 +123,7 @@ class _LoginPageState extends State<LoginPage> {
         'http://10.0.2.2:5000/login?name=$name&password=$password';
 //        'http://172.20.10.5:8080/http_server/login?name=$username&password=$password';
     UserDao.fetch(signupUrl).then((SignupModel model) async {
-      print(model.errno);
+      print(model.toJson());
       if (model.errno == 0) {
         setState(() {
           userModel = model.data;
