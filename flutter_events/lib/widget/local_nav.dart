@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_events/model/user_model.dart';
 import 'package:flutter_events/pages/events_page.dart';
 
 const ICONS = ['Recent', 'Joined', 'Nearby', 'Popular'];
 const URL = 'http://10.0.2.2:5000/';
 
 class LocalNav extends StatelessWidget {
+  final UserModel userModel;
+
+  const LocalNav({Key key, this.userModel}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -42,6 +47,7 @@ class LocalNav extends StatelessWidget {
                       url: url,
                       hideIcon: false,
                       title: name,
+                      userModel: this.userModel,
                     )));
 //        }
       },

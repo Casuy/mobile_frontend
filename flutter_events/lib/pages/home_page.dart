@@ -136,10 +136,14 @@ class _HomePageState extends State<HomePage> {
         //local navigation
         Padding(
           padding: EdgeInsets.fromLTRB(0, 0, 0, 7),
-          child: LocalNav(),
+          child: LocalNav(
+            userModel: widget.userModel,
+          ),
         ),
         //grid navigation
-        GridNav(),
+        GridNav(
+          userModel: widget.userModel,
+        ),
       ],
     );
   }
@@ -198,8 +202,10 @@ class _HomePageState extends State<HomePage> {
                 context,
                 MaterialPageRoute(builder: (context) {
                   EventItemModel model = bannerList[index];
-                  return
-                    EventDetailPage(item: model,);
+                  return EventDetailPage(
+                    item: model,
+                    userModel: widget.userModel,
+                  );
                 }),
               );
             },
@@ -216,6 +222,7 @@ class _HomePageState extends State<HomePage> {
         MaterialPageRoute(
             builder: (context) => SearchPage(
                   hint: SEARCH_BAR_DEFAULT_TEXT,
+                  userModel: widget.userModel,
                 )));
   }
 
@@ -225,6 +232,11 @@ class _HomePageState extends State<HomePage> {
   }
 
   _jumpToMy() {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => MyPage()));
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => MyPage(
+                  userModel: widget.userModel,
+                )));
   }
 }

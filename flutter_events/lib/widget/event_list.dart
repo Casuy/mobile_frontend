@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_events/model/event_item_model.dart';
 import 'package:flutter_events/model/search_model.dart';
+import 'package:flutter_events/model/user_model.dart';
 import 'package:flutter_events/pages/event_detail_page.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geolocator/geolocator.dart' as prefix0;
@@ -8,10 +9,12 @@ import 'package:geolocator/geolocator.dart' as prefix0;
 const TYPES = ['ball', 'bike', 'exercise', 'running', 'swim', 'yoga'];
 
 class EventList extends StatefulWidget {
+  final UserModel userModel;
   final SearchModel searchModel;
   final bool hideIcon;
 
-  const EventList({Key key, this.searchModel, this.hideIcon}) : super(key: key);
+  const EventList({Key key, this.searchModel, this.hideIcon, this.userModel})
+      : super(key: key);
 
   @override
   _EventListState createState() => _EventListState();
@@ -46,6 +49,7 @@ class _EventListState extends State<EventList> {
             MaterialPageRoute(
                 builder: (context) => EventDetailPage(
                       item: item,
+                      userModel: widget.userModel,
                     )));
       },
       child: Container(

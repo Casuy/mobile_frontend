@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_events/model/event_item_model.dart';
+import 'package:flutter_events/model/user_model.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -21,9 +22,10 @@ const MONTH = {
 };
 
 class EventDetailPage extends StatefulWidget {
+  final UserModel userModel;
   final EventItemModel item;
 
-  const EventDetailPage({Key key, this.item}) : super(key: key);
+  const EventDetailPage({Key key, this.item, this.userModel}) : super(key: key);
 
   @override
   _EventDetailPageState createState() => _EventDetailPageState();

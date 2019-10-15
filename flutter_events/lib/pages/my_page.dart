@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_events/model/user_model.dart';
 
 class MyPage extends StatefulWidget{
+  final UserModel userModel;
+
+  const MyPage({Key key, this.userModel}) : super(key: key);
+
   @override
   _MyPageState createState() => _MyPageState();
 }

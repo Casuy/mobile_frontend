@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_events/dao/search_dao.dart';
 import 'package:flutter_events/model/search_model.dart';
+import 'package:flutter_events/model/user_model.dart';
 import 'package:flutter_events/widget/event_list.dart';
 import 'package:flutter_events/widget/search_bar.dart';
 
@@ -9,13 +10,19 @@ const URL = 'http://10.0.2.2:5000/search?keyword=';
 const TYPES = ['ball', 'bike', 'exercise', 'running', 'swim', 'yoga'];
 
 class SearchPage extends StatefulWidget {
+  final UserModel userModel;
   final bool hideLeft;
   final String searchUrl;
   final String keyword;
   final String hint;
 
   const SearchPage(
-      {Key key, this.hideLeft, this.searchUrl = URL, this.keyword, this.hint})
+      {Key key,
+      this.hideLeft,
+      this.searchUrl = URL,
+      this.keyword,
+      this.hint,
+      this.userModel})
       : super(key: key);
 
   @override
@@ -42,9 +49,10 @@ class _SearchPageState extends State<SearchPage> {
               removeTop: true,
               child: Expanded(
                   flex: 1,
-                  child:
-                  EventList(searchModel: searchModel,)
-              )),
+                  child: EventList(
+                    searchModel: searchModel,
+                    userModel: widget.userModel,
+                  ))),
         ],
       ),
     );
@@ -93,10 +101,6 @@ class _SearchPageState extends State<SearchPage> {
           searchModel = model;
         });
       }
-    }).catchError((e) {
-      //TODO: Error page
-      print(e);
-    });
+    }).catchError((e) {});
   }
-
 }

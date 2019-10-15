@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_events/model/user_model.dart';
 import 'package:flutter_events/pages/events_page.dart';
 
 const TYPES = ['Ball', 'Bike', 'Exercise', 'Running', 'Swim', 'Yoga'];
 
 class GridNav extends StatelessWidget {
-  const GridNav({Key key}) : super(key: key);
+  final UserModel userModel;
+
+  const GridNav({Key key, this.userModel}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +26,7 @@ class GridNav extends StatelessWidget {
                 builder: (context) => EventsPage(
                       type: title.toLowerCase(),
                       title: title,
+                      userModel: this.userModel,
                     )));
       },
       child: widget,

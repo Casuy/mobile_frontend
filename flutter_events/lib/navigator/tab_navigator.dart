@@ -8,7 +8,6 @@ import 'package:flutter_events/pages/my_page.dart';
 import 'package:flutter_events/pages/search_page.dart';
 
 class TabNavigator extends StatefulWidget {
-
   final UserModel userModel;
 
   const TabNavigator({Key key, this.userModel}) : super(key: key);
@@ -18,7 +17,6 @@ class TabNavigator extends StatefulWidget {
 }
 
 class _TabNavigatorState extends State<TabNavigator> {
-
   final _defaultColor = Colors.grey;
   final _activeColor = Colors.black;
   int _currentIndex = 0;
@@ -38,13 +36,19 @@ class _TabNavigatorState extends State<TabNavigator> {
         physics: NeverScrollableScrollPhysics(),
         controller: _controller,
         children: <Widget>[
-          HomePage(userModel: widget.userModel,),
+          HomePage(
+            userModel: widget.userModel,
+          ),
           SearchPage(
+            userModel: widget.userModel,
             hideLeft: true,
           ),
           AddEventPage(
+            userModel: widget.userModel,
           ),
-          MyPage()
+          MyPage(
+            userModel: widget.userModel,
+          )
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
