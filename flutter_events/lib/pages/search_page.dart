@@ -79,6 +79,7 @@ class _SearchPageState extends State<SearchPage> {
                 Navigator.pop(context);
               },
               rightButtonClick: () {
+                //hide keyboard
                 FocusScope.of(context).requestFocus(FocusNode());
               },
               onChanged: _onTextChange,

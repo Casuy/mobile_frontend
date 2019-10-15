@@ -4,7 +4,6 @@ import 'package:flutter_events/model/search_model.dart';
 import 'package:flutter_events/model/user_model.dart';
 import 'package:flutter_events/pages/event_detail_page.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:geolocator/geolocator.dart' as prefix0;
 
 const TYPES = ['ball', 'bike', 'exercise', 'running', 'swim', 'yoga'];
 

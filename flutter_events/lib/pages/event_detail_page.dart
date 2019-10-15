@@ -38,14 +38,12 @@ class _EventDetailPageState extends State<EventDetailPage> {
   String status;
   double distance;
   var _onPressed;
-  bool _isButtonDisabled;
   PromptPage promptPage = new PromptPage();
 
   @override
   void initState() {
     super.initState();
     this.status = _setStatus(widget.item);
-    this._isButtonDisabled = false;
   }
 
   @override
@@ -179,7 +177,7 @@ class _EventDetailPageState extends State<EventDetailPage> {
           _description(),
 
           //TODO: participants
-          _participants(),
+          _participants(widget.item),
         ],
       ),
     );
@@ -304,7 +302,19 @@ class _EventDetailPageState extends State<EventDetailPage> {
     );
   }
 
-  _participants() {
+  _participants(EventItemModel item) {
+    List<String> participantNames = [];
+    if (item.participants.length != 0) {
+      participantNames = item.participants.map((user) => user.name).toList();
+      print(participantNames);
+    }
+
+    List<Widget> nameWidgets = [];
+    participantNames.forEach((name) => nameWidgets.add(Text(
+          '$name,  ',
+          style: TextStyle(fontSize: 16),
+        )));
+
     return Container(
       decoration: BoxDecoration(
           border: Border(top: BorderSide(width: 0.3, color: Colors.grey))),
@@ -324,7 +334,7 @@ class _EventDetailPageState extends State<EventDetailPage> {
           //TODO: list of participants, user names should be fine...
           Container(
             child: Row(
-              children: <Widget>[],
+              children: nameWidgets,
             ),
           )
         ],
@@ -426,6 +436,7 @@ class _EventDetailPageState extends State<EventDetailPage> {
             await promptPage.showMessage(context, "Event joined!");
             setState(() {
               user.joinedEvents.add(item);
+              item.participants.add(user);
             });
           }
         }).catchError((e) {});
