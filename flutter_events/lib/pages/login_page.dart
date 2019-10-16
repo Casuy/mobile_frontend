@@ -24,11 +24,16 @@ class _LoginPageState extends State<LoginPage> {
         body: Stack(children: <Widget>[
       Opacity(
           opacity: 0.5,
-          child: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: ExactAssetImage('images/sign_up_background.jpg'),
-                fit: BoxFit.cover,
+          child: GestureDetector(
+            onTap: () {
+              FocusScope.of(context).requestFocus(new FocusNode());
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: ExactAssetImage('images/sign_up_background.jpg'),
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           )),
@@ -119,10 +124,8 @@ class _LoginPageState extends State<LoginPage> {
       await promptPage.showMessage(context, "Invalid input!");
       return;
     }
-    String signupUrl =
-        'http://10.0.2.2:5000/login?name=$name&password=$password';
-//        'http://172.20.10.5:8080/http_server/login?name=$username&password=$password';
-    UserDao.fetch(signupUrl).then((SignupModel model) async {
+    String loginArgs = 'login?name=$name&password=$password';
+    UserDao.fetch(loginArgs).then((SignupModel model) async {
       print(model.toJson());
       if (model.errno == 0) {
         setState(() {
@@ -130,7 +133,8 @@ class _LoginPageState extends State<LoginPage> {
         });
         _jumpToHomePage(userModel);
       } else if (model.errno == 1) {
-        await promptPage.showMessage(context, "Uncorrect username or password!");
+        await promptPage.showMessage(
+            context, "Uncorrect username or password!");
         return;
       } else if (model.errno == 2) {
         await promptPage.showMessage(context, "Username does not exist!");

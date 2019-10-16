@@ -3,7 +3,6 @@ import 'package:flutter_events/model/user_model.dart';
 import 'package:flutter_events/pages/events_page.dart';
 
 const ICONS = ['Recent', 'Joined', 'Nearby', 'Popular'];
-const URL = 'http://10.0.2.2:5000/';
 
 class LocalNav extends StatelessWidget {
   final UserModel userModel;
@@ -35,16 +34,13 @@ class LocalNav extends StatelessWidget {
     return GestureDetector(
       onTap: () {
 //TODO: navigate to different pages (google map for nearby) (joined: userId)
-        String url = URL + name.toLowerCase();
-        print(url);
 //        if(name.contains('Nearby')){
-
 //        } else {
         Navigator.push(
             context,
             MaterialPageRoute(
                 builder: (context) => EventsPage(
-                      url: url,
+                      args: name.toLowerCase(),
                       hideIcon: false,
                       title: name,
                       userModel: this.userModel,

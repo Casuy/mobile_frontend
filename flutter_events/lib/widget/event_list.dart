@@ -153,8 +153,10 @@ class _EventListState extends State<EventList> {
       result = '< 100 m';
     } else if (distance >= 100 && distance < 1000) {
       result = distance.round().toString() + ' m';
-    } else {
+    } else if (distance < 99000){
       result = (distance / 1000).toStringAsFixed(1) + ' km';
+    } else {
+      result = '> 99 km';
     }
 
     return Text(

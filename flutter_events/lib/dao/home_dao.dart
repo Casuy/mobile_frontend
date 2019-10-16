@@ -4,7 +4,6 @@ import 'package:flutter_events/model/home_model.dart';
 import 'package:http/http.dart' as http;
 
 const HOME_URL = 'http://10.0.2.2:5000/homepage';
-//const HOME_URL = '172.20.10.5:8080/mobile_project/homepage';
 
 class HomeDao {
   static Future<HomeModel> fetch() async {

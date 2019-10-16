@@ -4,19 +4,18 @@ import 'package:flutter_events/model/search_model.dart';
 import 'package:flutter_events/model/user_model.dart';
 import 'package:flutter_events/widget/event_list.dart';
 
-const URL = 'http://10.0.2.2:5000/events?type=';
-//const URL = 'http://172.20.10.5:8080/http_server/events?type=';
+const ARGS = 'events?type=';
 
 class EventsPage extends StatefulWidget {
   final UserModel userModel;
-  final String url;
+  final String args;
   final String type;
   final String title;
   final bool hideIcon;
 
   const EventsPage(
       {Key key,
-      this.url = URL,
+      this.args = ARGS,
       this.type,
       this.hideIcon = false,
       this.title,
@@ -53,12 +52,12 @@ class _EventsPageState extends State<EventsPage> {
 //      return;
 //    }
 
-    String url = widget.url;
+    String args = widget.args;
 
     if (widget.type != null) {
-      url = widget.url + widget.type;
+      args = widget.args + widget.type;
     }
-    SearchDao.fetch(url, '').then((SearchModel model) {
+    SearchDao.fetch(args, '').then((SearchModel model) {
       setState(() {
         searchModel = model;
       });

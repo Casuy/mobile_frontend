@@ -27,9 +27,10 @@ class AddEventPage extends StatefulWidget {
 
 class _AddEventPageState extends State<AddEventPage> {
   final TextEditingController _titleController = new TextEditingController();
+  final TextEditingController _typeController = new TextEditingController();
   final TextEditingController _addressController = new TextEditingController();
   final TextEditingController _districtController = new TextEditingController();
-  final TextEditingController _discriptionController =
+  final TextEditingController _descriptionController =
       new TextEditingController();
 
   String title;
@@ -58,33 +59,69 @@ class _AddEventPageState extends State<AddEventPage> {
 
   _body(BuildContext context) {
     return Container(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
+      child: Stack(
         children: <Widget>[
-          UnconstrainedBox(
-            child: Placeholder(
-              fallbackHeight: 100,
-              fallbackWidth: 300,
-              color: Colors.transparent,
-            ),
-          ),
-          Container(
-            height: 50,
-            width: 300,
-            child: _titleTextField(),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              _startTimeButton(),
-              Text(
-                '--',
-                style: TextStyle(fontSize: 16),
+              UnconstrainedBox(
+                child: Placeholder(
+                  fallbackHeight: 80,
+                  fallbackWidth: 300,
+                  color: Colors.transparent,
+                ),
               ),
-              _endTimeButton(),
-              _dateButton()
+              Container(
+                height: 50,
+                width: 300,
+                child: _titleTextField(),
+              ),
+              Container(
+                height: 50,
+                width: 100,
+                child: _typeTextField(),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  _startTimeButton(),
+                  Text(
+                    '--',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  _endTimeButton(),
+                  _dateButton()
+                ],
+              ),
+              Container(
+                height: 50,
+                width: 300,
+                child: _addressTextField(),
+              ),
+              Container(
+                height: 50,
+                width: 300,
+                child: _districtTextField(),
+              ),
+              Container(
+                height: 50,
+                width: 300,
+                child: _descriptionTextField(),
+              )
             ],
           ),
+          Positioned(
+            top: 500,
+            left: 165,
+            child: RaisedButton(
+              onPressed: _postEvent(),
+              color: Colors.red,
+              child: Text(
+                'Post Event!',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          )
         ],
       ),
     );
@@ -101,14 +138,25 @@ class _AddEventPageState extends State<AddEventPage> {
     );
   }
 
+  _typeTextField() {
+    return TextField(
+      controller: _typeController,
+      textAlign: TextAlign.center,
+      style: TextStyle(fontSize: 16),
+      decoration: InputDecoration(
+        hintText: 'Type',
+      ),
+    );
+  }
+
   _addressTextField() {
     return TextField(
       controller: _addressController,
       textAlign: TextAlign.start,
       style: TextStyle(fontSize: 16),
       decoration: InputDecoration(
-          hintText: 'Example: 203 Collins Street',
-          icon: Icon(Icons.location_on)),
+        hintText: 'Address: 203 Collins Street',
+      ),
     );
   }
 
@@ -118,7 +166,18 @@ class _AddEventPageState extends State<AddEventPage> {
       textAlign: TextAlign.start,
       style: TextStyle(fontSize: 16),
       decoration: InputDecoration(
-        hintText: 'Example: Melbourne VIC',
+        hintText: 'District: Melbourne VIC',
+      ),
+    );
+  }
+
+  _descriptionTextField() {
+    return TextField(
+      controller: _descriptionController,
+      textAlign: TextAlign.start,
+      style: TextStyle(fontSize: 16),
+      decoration: InputDecoration(
+        hintText: 'Description: ...',
       ),
     );
   }
@@ -129,7 +188,7 @@ class _AddEventPageState extends State<AddEventPage> {
       elevation: 0.0,
       child: Text(
         this.startTime == null ? 'Start Time' : '${this.startTime}',
-        style: TextStyle(fontSize: 16),
+        style: TextStyle(fontSize: 18),
       ),
       onPressed: () => _showTimePicker('start'),
     );
@@ -141,7 +200,7 @@ class _AddEventPageState extends State<AddEventPage> {
       elevation: 0.0,
       child: Text(
         this.endTime == null ? 'End Time' : '${this.endTime}',
-        style: TextStyle(fontSize: 16),
+        style: TextStyle(fontSize: 18),
       ),
       onPressed: () => _showTimePicker('end'),
     );
@@ -155,7 +214,7 @@ class _AddEventPageState extends State<AddEventPage> {
         (this.day == null || this.month == null)
             ? 'Date'
             : '${this.day}  ${MONTH[this.month]}',
-        style: TextStyle(fontSize: 16),
+        style: TextStyle(fontSize: 18),
       ),
       onPressed: () => _showDatePicker(),
     );
@@ -197,4 +256,6 @@ class _AddEventPageState extends State<AddEventPage> {
       } catch (e) {}
     });
   }
+
+  _postEvent() {}
 }

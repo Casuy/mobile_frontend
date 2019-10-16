@@ -25,6 +25,7 @@ const MONTH = {
 };
 
 class EventDetailPage extends StatefulWidget {
+
   final UserModel userModel;
   final EventItemModel item;
 
