@@ -3,6 +3,7 @@ import 'package:flutter_events/dao/user_dao.dart';
 import 'package:flutter_events/model/signup_model.dart';
 import 'package:flutter_events/model/user_model.dart';
 import 'package:flutter_events/navigator/tab_navigator.dart';
+import 'package:flutter_events/pages/await_page.dart';
 import 'package:flutter_events/pages/prompt_page.dart';
 import 'package:flutter_events/pages/signup_page.dart';
 
@@ -119,30 +120,52 @@ class _LoginPageState extends State<LoginPage> {
     });
   }
 
+
   _handleSubmit(String name, String password) async {
+    FocusScope.of(context).requestFocus(new FocusNode());
+
     if (name == '' || password == '') {
       await promptPage.showMessage(context, "Invalid input!");
       return;
     }
-    String loginArgs = 'login?name=$name&password=$password';
-    UserDao.fetch(loginArgs).then((SignupModel model) async {
-      print(model.toJson());
-      if (model.errno == 0) {
-        setState(() {
-          userModel = model.data;
-        });
-        _jumpToHomePage(userModel);
-      } else if (model.errno == 1) {
+
+    showDialog<int>(
+        context: context,
+        barrierDismissible: false,
+        child: AwaitPage(_userLogin(
+          name,
+          password,
+        ))).then((int onValue) async {
+      if (onValue == 0) {
+        _launchApp(userModel);
+      } else if (onValue == 1) {
         await promptPage.showMessage(
             context, "Uncorrect username or password!");
-        return;
-      } else if (model.errno == 2) {
+      } else if (onValue == 2) {
         await promptPage.showMessage(context, "Username does not exist!");
       }
     });
   }
 
-  _jumpToHomePage(UserModel model) {
+  Future<int> _userLogin(String name, String password) async {
+    String loginArgs = 'login?name=$name&password=$password';
+
+    return await UserDao.fetch(loginArgs).then((SignupModel model) async {
+      if (model.errno == 0) {
+        setState(() {
+          userModel = model.data;
+        });
+        return 0;
+      } else if (model.errno == 1) {
+        return 1;
+      } else if (model.errno == 2) {
+        return 2;
+      }
+      ;
+    });
+  }
+
+  _launchApp(UserModel model) {
     Navigator.push(
         context,
         MaterialPageRoute(
