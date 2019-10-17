@@ -90,7 +90,7 @@ class _TabNavigatorState extends State<TabNavigator> {
             BottomNavigationBarItem(
                 icon: Icon(Icons.person, color: _defaultColor),
                 activeIcon: Icon(Icons.person, color: _activeColor),
-                title: Text('My',
+                title: Text('Profile',
                     style: TextStyle(
                         fontSize: 16,
                         color:
