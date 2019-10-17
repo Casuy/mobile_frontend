@@ -1,13 +1,13 @@
 import 'package:flutter_events/model/user_model.dart';
 
-class SignupModel {
+class AccountModel {
 
   final int errno;
   final UserModel data;
 
-  SignupModel({this.errno, this.data});
+  AccountModel({this.errno, this.data});
 
-  factory SignupModel.fromJson(Map<String, dynamic> json) {
+  factory AccountModel.fromJson(Map<String, dynamic> json) {
     var dataJson = json['data'];
     UserModel userModel;
 
@@ -15,7 +15,7 @@ class SignupModel {
       userModel = UserModel.fromJson(json['data']);
     }
 
-    return SignupModel(errno: json['errno'], data: userModel);
+    return AccountModel(errno: json['errno'], data: userModel);
   }
 
   Map<String, dynamic> toJson() {

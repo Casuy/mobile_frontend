@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_events/dao/user_dao.dart';
-import 'package:flutter_events/model/signup_model.dart';
+import 'package:flutter_events/dao/user_account_dao.dart';
+import 'package:flutter_events/model/account_model.dart';
 import 'package:flutter_events/model/user_model.dart';
 import 'package:flutter_events/navigator/tab_navigator.dart';
 import 'package:flutter_events/pages/await_page.dart';
@@ -150,7 +150,7 @@ class _LoginPageState extends State<LoginPage> {
   Future<int> _userLogin(String name, String password) async {
     String loginArgs = 'login?name=$name&password=$password';
 
-    return await UserDao.fetch(loginArgs).then((SignupModel model) async {
+    return await UserAccountDao.fetch(loginArgs).then((AccountModel model) async {
       if (model.errno == 0) {
         setState(() {
           userModel = model.data;

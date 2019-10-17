@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 class AwaitPage extends StatefulWidget {
-  AwaitPage(this.requestCallback);
-
   final Future<int> requestCallback;
+
+  AwaitPage(this.requestCallback);
 
   @override
   _AwaitPageState createState() => new _AwaitPageState();
