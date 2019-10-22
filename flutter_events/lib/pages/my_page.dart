@@ -15,7 +15,7 @@ class _MyPageState extends State<MyPage>{
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text('My'),
+        child: Text('Profile'),
       ),
     );
   }
